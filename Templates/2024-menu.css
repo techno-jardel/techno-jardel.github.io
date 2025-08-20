@@ -1,4 +1,4 @@
-/*Strip the ul of padding and list styling*/
+﻿/*Strip the ul of padding and list styling*/
 ul {
 	list-style-type:none;
 	margin:0;
@@ -11,9 +11,6 @@ li {
 	display:inline-block;
 	float: left;
 	margin-right: 1px;
-	Content-Type: text/css; 
-	charset=utf8;
-	@charset "utf8";
 }
 
 /*Style for menu links*/
