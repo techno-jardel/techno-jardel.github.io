@@ -11,6 +11,9 @@ li {
 	display:inline-block;
 	float: left;
 	margin-right: 1px;
+	Content-Type: text/css; 
+	charset=utf8;
+	@charset "utf8";
 }
 
 /*Style for menu links*/
@@ -111,8 +114,3 @@ input[type=checkbox]:checked ~ #menu{
 		display:block;
 	}
 }
-
-Content-Type: text/css; charset=utf8;
-@charset "utf8";
-Content-Type: text/css; charset=utf-8;
-@charset "utf-8";
