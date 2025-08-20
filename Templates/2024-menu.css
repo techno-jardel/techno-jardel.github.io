@@ -1,4 +1,8 @@
-Content-Type: text/css; charset=utf-8
+
+
+Content-Type: text/css; charset=utf8
+
+@charset "utf8";
 	
 	/*Strip the ul of padding and list styling*/
 ul {
