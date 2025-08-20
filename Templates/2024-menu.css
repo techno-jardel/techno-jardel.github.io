@@ -1,10 +1,4 @@
-
-
-Content-Type: text/css; charset=utf8
-
-@charset "utf8";
-	
-	/*Strip the ul of padding and list styling*/
+/*Strip the ul of padding and list styling*/
 ul {
 	list-style-type:none;
 	margin:0;
@@ -117,3 +111,8 @@ input[type=checkbox]:checked ~ #menu{
 		display:block;
 	}
 }
+
+Content-Type: text/css; charset=utf8;
+@charset "utf8";
+Content-Type: text/css; charset=utf-8;
+@charset "utf-8";

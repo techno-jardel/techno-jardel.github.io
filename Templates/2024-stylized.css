@@ -1,9 +1,3 @@
-Content-Type: text/css; charset=utf8
-
-@charset "utf8";
-
-
-
 .h0 {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
@@ -86,3 +80,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 	border: none ;
 	max-width: 100%;
 }
+
+Content-Type: text/css; charset=utf8;
+@charset "utf8";
+Content-Type: text/css; charset=utf-8;
+@charset "utf-8";
