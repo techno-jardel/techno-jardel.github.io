@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test AR.js Hiro</title>
+  <script src="aframe.min.js"></script>
+  <script src="aframe-ar.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
+</head>
+<body>
+
+  <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+    <!-- Marqueur SNT -->
+    <a-marker type="pattern" url="pattern-SNT.patt">
+
+      <!-- Boîte rouge semi-transparente -->
+      <a-box position="0 0.5 0" material="opacity: 0.5; color: red;"></a-box>
+      
+      <!-- Texte 3D -->
+      <a-text 
+        value="INDICE-n°-36" 
+        position="0 2 0" 
+        rotation="0 0 0" 
+        align="center" 
+        color="blue" 
+        width="5">
+      </a-text>
+
+    </a-marker>
+
+    <!-- Caméra -->
+    <a-entity camera></a-entity>
+  </a-scene>
+
+
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test AR.js marqueur SNT</title>
+  <!--  scripts de chez https://aframe.io/-->
+  <script src="aframe.min.js"></script>
+  <script src="aframe-ar.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
+</head>
+<body>
+
+  <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+    <!-- Marqueur personnalisé de chez https://jeromeetienne.github.io/-->
+    <a-marker type="pattern" url="pattern-SNT.patt">
+
+      <!-- modele 3d de chez https://sketchfab.com/ -->
+<a-entity 
+  gltf-model="giraffe/scene.gltf" 
+  position="0 0 0" 
+  scale="0.3 0.3 0.3">
+</a-entity>
+
+      
+      <!-- Texte 3D -->
+      <a-text 
+        value="GIRAFFE" 
+        position="0 1 0" 
+        rotation="0 0 0" 
+        align="center" 
+        color="blue" 
+        width="5">
+      </a-text>
+
+    </a-marker>
+
+    <!-- Caméra -->
+    <a-entity camera></a-entity>
+  </a-scene>
+
+
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+cmd
+cd..
+cd..
+cd html-test
+python3 -m http.server
+
+
+navigateur
+http://localhost:8000
+
