@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion du cookie Ouistiti-poilu</title>
+    <link rel="stylesheet" type="text/css" href="feuilledestyle-dugateau.css">
+
+</head>
+<body>
+
+    <h2>Créer, lire et supprimer un cookie</h2>
+
+    <form id="formNom">
+        <label for="nom">Votre nom :</label>
+        <input type="text" id="nom" name="nom" required>
+        <button type="submit">Créer le cookie</button>
+    </form>
+
+    <br>
+
+    <button id="btnLire">Lire le cookie</button>
+    <button id="btnSupprimer">Supprimer le cookie</button>
+
+    <p id="message"></p>
+
+    <script>
+        // Création du cookie
+        document.getElementById("formNom").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const nom = document.getElementById("nom").value;
+
+            const expiration = new Date();
+            expiration.setTime(expiration.getTime() + (7 * 24 * 60 * 60 * 1000));
+
+            document.cookie =
+                "Ouistiti-poilu=" + encodeURIComponent(nom) +
+                "; expires=" + expiration.toUTCString() +
+                "; path=/";
+
+            document.getElementById("message").textContent =
+                "Cookie créé pour : " + nom;
+        });
+
+        // Lecture du cookie
+        document.getElementById("btnLire").addEventListener("click", function() {
+            const cookies = document.cookie.split("; ");
+            let valeur = null;
+
+            for (let c of cookies) {
+                if (c.startsWith("Ouistiti-poilu=")) {
+                    valeur = decodeURIComponent(c.split("=")[1]);
+                }
+            }
+
+            if (valeur) {
+                document.getElementById("message").textContent =
+                    "Le cookie contient : " + valeur;
+            } else {
+                document.getElementById("message").textContent =
+                    "Le cookie Ouistiti-poilu n'existe pas.";
+            }
+        });
+
+        // Suppression du cookie
+        document.getElementById("btnSupprimer").addEventListener("click", function() {
+            document.cookie =
+                "Ouistiti-poilu=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+
+            document.getElementById("message").textContent =
+                "Cookie supprimé.";
+        });
+    </script>
+
+</body>
+</html>

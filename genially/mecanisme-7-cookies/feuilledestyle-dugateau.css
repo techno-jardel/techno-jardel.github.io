@@ -1,0 +1,23 @@
+/* Style pour la structure, on va faire un fond blanc */
+
+body {     
+   background-color: #FFF;
+   padding: 50px;
+   margin: 0px 0px 0px;
+   font-family: verdana, sans-serif;
+   font-weight: normal;
+}
+
+
+
+
+/* Style pour le texte, on va écrire en noir sur blanc */
+
+ p {
+            color: #000;
+            font-size: 1.2em;
+            font-style: normal;
+            font-weight: normal;
+
+        }
+
