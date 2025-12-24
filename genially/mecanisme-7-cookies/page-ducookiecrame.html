@@ -1,8 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>IP + Géolocalisation</title> <link rel="stylesheet" type="text/css" href="feuilledestyle-dugateau.css">
+    <title>IP + Géolocalisation + Cookie</title>
+    <link rel="stylesheet" type="text/css" href="feuilledestyle-dugateau.css">
+
 </head>
 <body>
 
@@ -10,6 +13,7 @@
 
 <button id="btnGetGeo">Récupérer IP + Localisation</button>
 <button id="btnReadCookie">Lire le cookie</button>
+<button id="btnDeleteCookie">Supprimer le cookie</button>
 
 <p id="output"></p>
 
@@ -52,8 +56,17 @@ function readCookie() {
         "Cookies actuels : " + document.cookie;
 }
 
+// Supprimer le cookie
+function deleteCookie() {
+    document.cookie = "ouistiti-curieux=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.getElementById("output").textContent =
+        "Cookie 'ouistiti-curieux' supprimé.";
+}
+
+// Événements des boutons
 document.getElementById("btnGetGeo").addEventListener("click", getGeo);
 document.getElementById("btnReadCookie").addEventListener("click", readCookie);
+document.getElementById("btnDeleteCookie").addEventListener("click", deleteCookie);
 </script>
 
 </body>
