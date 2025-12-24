@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>IP + Géolocalisation</title> <link rel="stylesheet" type="text/css" href="feuilledestyle-dugateau.css">
+</head>
+<body>
+
+<h2>Test IP + Géolocalisation + Cookie</h2>
+
+<button id="btnGetGeo">Récupérer IP + Localisation</button>
+<button id="btnReadCookie">Lire le cookie</button>
+
+<p id="output"></p>
+
+<script>
+// Fonction principale : IP + géolocalisation
+function getGeo() {
+    fetch("https://api.ipify.org?format=json")
+        .then(res => res.json())
+        .then(data => {
+            const ip = data.ip;
+
+            // Appel API de géolocalisation
+            return fetch("https://ipapi.co/" + ip + "/json/");
+        })
+        .then(res => res.json())
+        .then(info => {
+            const ville = info.city;
+            const region = info.region;
+            const pays = info.country_name;
+
+            // Création du cookie
+            document.cookie = "ouistiti-curieux=" + ville + "; path=/;";
+
+            document.getElementById("output").innerHTML =
+                "<strong>IP :</strong> " + info.ip + "<br>" +
+                "<strong>Ville :</strong> " + ville + "<br>" +
+                "<strong>Région :</strong> " + region + "<br>" +
+                "<strong>Pays :</strong> " + pays + "<br>" +
+                "<br>Cookie créé : ouistiti-curieux=" + ville;
+        })
+        .catch(err => {
+            document.getElementById("output").textContent =
+                "Erreur : " + err;
+        });
+}
+
+// Lire les cookies
+function readCookie() {
+    document.getElementById("output").textContent =
+        "Cookies actuels : " + document.cookie;
+}
+
+document.getElementById("btnGetGeo").addEventListener("click", getGeo);
+document.getElementById("btnReadCookie").addEventListener("click", readCookie);
+</script>
+
+</body>
+</html>
