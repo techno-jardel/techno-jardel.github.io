@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://scape.enepe.fr/ressources/cesar/index3.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tu quoque mi fili</title>
+	<script src="./Tuquoquemifili_files/jquery-3.4.1.min.js.téléchargement"></script>
+<style>
+/*code d'apres https://www.perkley.com/ */
+
+body,html{
+    position: relative;
+ width:100vh; height:100vh;
+    overflow:hidden;
+    margin:0;padding:0px;
+    border:0;
+}
+#cipherWrapper {
+	margin:auto;
+    text-align: center;
+}
+#cipherContainer {
+    display:table;
+     margin:1vh;
+   width: 97vh; height:97vh;
+  position:relative;
+   text-align: center;
+}
+#cipherOuter {
+    z-index:2; 
+    width: 97vh; height:97vh;
+    
+}
+#cipherInner{
+    position:absolute;
+    z-index:9;
+    width: 97vh; height:97vh;
+     -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+padding:0;
+margin:0;
+    border:0;
+ }
+img{
+    border:0;
+     width: 100%; height:100%;
+     -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+}
+@media (orientation: portrait) {
+body, html
+{
+width: 100vw; height:100vw;
+}
+#cipherContainer, #cipherOuter, #cipherInner
+{
+width: 97vw; height:97vw;
+}
+}
+	</style>
+	</head>
+	<body>
+	
+	
+	<div id="cipherContainer">
+	<div id="cipherInner">
+	    <img id="cipherRotate" src="./Tuquoquemifili_files/roue-3TOUT.png" alt="" style="transform: rotate(41.3133deg) translateZ(0px); touch-action: none;">
+	</div>
+	<div id="cipherOuter">
+	    <img src="./Tuquoquemifili_files/roue-sur.png" alt="">
+	</div>
+</div>
+	<script src="./Tuquoquemifili_files/propeller.js.téléchargement"></script>
+	<script>
+	new Propeller(document.getElementById('cipherRotate'), {inertia: 0.8});
+</script>
+<script>
+$(function() {
+var currentDeg = 0;
+
+function cipher_rotate(angle) {
+	currentDeg = currentDeg + angle;
+	$("#cipherRotate").css('transform','rotate(' + currentDeg + 'deg)');
+	$("#cipherRotate").css('-moz-transform','rotate(' + currentDeg + 'deg)');
+	$("#cipherRotate").css('-webkit-transform','rotate(' + currentDeg + 'deg)');
+	$("#cipherRotate").css('-o-transform','rotate(' + currentDeg + 'deg)');
+	
+}
+    $(document).keydown(function(e) {
+    switch(e.which) {
+        case 37: // left
+        cipher_rotate(-1);
+        break;
+        
+        case 39: // right
+        cipher_rotate(1);
+        break;
+
+        default: return; // exit this handler for other keys
+    }
+});   
+});
+</script>
+	
+</body></html>
