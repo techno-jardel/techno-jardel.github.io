@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chantier Romain : L'Arc et le Cintre</title>
+    <style>
+        :root {
+            --bg-color: #2c3e50;
+            --container-bg: #ecf0f1;
+            --wood-stroke: #3e2723;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        #controls {
+            margin: 10px 0;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            z-index: 10;
+        }
+
+        #game-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: var(--container-bg);
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            border: 4px solid #bdc3c7;
+            cursor: default;
+        }
+
+        @media (max-width: 820px) {
+            #game-container { width: 95vw; height: 70vh; }
+        }
+
+        svg { width: 100%; height: 100%; touch-action: none; }
+
+        /* --- STYLES --- */
+
+        .target-locked { display: none; }
+
+        .target-shape {
+            fill: none;
+            stroke: #95a5a6;
+            stroke-width: 2;
+            stroke-dasharray: 6, 4;
+            opacity: 0.6;
+            transition: all 0.3s;
+        }
+
+        .target-active {
+            stroke: #2ecc71;
+            stroke-width: 4;
+            opacity: 1;
+            fill: rgba(46, 204, 113, 0.2);
+        }
+
+        .block {
+            stroke: #5d4037;
+            stroke-width: 1.5;
+            cursor: grab;
+            transition: filter 0.2s;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
+        }
+
+        .dragging {
+            cursor: grabbing;
+            filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5));
+            opacity: 0.9;
+        }
+
+        .snapped {
+            pointer-events: none;
+            filter: none;
+            stroke-width: 1;
+        }
+
+        /* Animation pour dire qu'il faut retirer le cintre */
+        .removable-pulse {
+            animation: pulse-red 1.5s infinite;
+            cursor: grab !important;
+            stroke: #c0392b !important;
+            stroke-width: 3 !important;
+        }
+
+        @keyframes pulse-red {
+            0% { filter: drop-shadow(0 0 2px #e74c3c); }
+            50% { filter: drop-shadow(0 0 10px #e74c3c); }
+            100% { filter: drop-shadow(0 0 2px #e74c3c); }
+        }
+
+        /* Couleurs */
+        .fill-pile { fill: #dcbfa5; }
+        .fill-impost { fill: #c0a080; }
+        .fill-buttress { fill: #bfb0a0; }
+        .fill-arch { fill: #e6b89c; }
+        .fill-keystone { fill: #d35400; }
+        
+        .block.fill-cintre {
+            fill: #a1887f;
+            stroke: var(--wood-stroke);
+            stroke-width: 2;
+        }
+        .target-shape.fill-cintre { stroke: #8d6e63; }
+
+        /* UI */
+        .tooltip-box {
+            position: absolute;
+            background: rgba(44, 62, 80, 0.9);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 1000;
+            font-size: 0.9rem;
+        }
+
+        .status-msg {
+            font-weight: bold; 
+            color: #f1c40f; 
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        button:hover { background-color: #c0392b; }
+
+    </style>
+</head>
+<body>
+
+    <div id="controls">
+        <div class="status-msg" id="status">Phase 1 : Les Fondations</div>
+        <button onclick="initGame()">Recommencer</button>
+    </div>
+
+    <div id="game-container">
+        <svg id="game-svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
+            <g id="layer-targets"></g>
+            <g id="layer-structure"></g> <g id="layer-snapped"></g>   <g id="layer-blocks"></g>    </svg>
+    </div>
+
+<script>
+    const SVG_NS = "http://www.w3.org/2000/svg";
+    const layerTargets = document.getElementById('layer-targets');
+    const layerSnapped = document.getElementById('layer-snapped');
+    const layerBlocks = document.getElementById('layer-blocks');
+    const layerStructure = document.getElementById('layer-structure');
+    const statusEl = document.getElementById('status');
+    const svg = document.getElementById('game-svg');
+
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip-box';
+    document.body.appendChild(tooltip);
+
+    // --- GÉOMÉTRIE ---
+    const CX = 400; 
+    const GROUND_Y = 550; 
+    const BLOCK_SIZE = 40; 
+    const PILE_H = 6; 
+    const ARCH_RADIUS_INNER = 80;
+    const ARCH_THICKNESS = 40;
+    const ARCH_RADIUS_OUTER = ARCH_RADIUS_INNER + ARCH_THICKNESS;
+    const BUTTRESS_W = 60;
+    
+    let targets = []; 
+    let selectedBlock = null;
+    let offset = { x: 0, y: 0 };
+    let cintreRemoved = false; // Nouvel état pour la fin
+    
+    // --- 1. CRÉATION DES DONNÉES ---
+
+    function createGameElements() {
+        targets = [];
+        const blocksToCreate = [];
+        let idCounter = 0;
+
+        const register = (id, category, cls, pathFunc, tx, ty, tr, dependencyIds = []) => {
+            targets.push({
+                id: id, category: category, class: cls,
+                x: tx, y: ty, r: tr,
+                occupied: false, locked: true,
+                dependencies: dependencyIds,
+                path: pathFunc, domElement: null
+            });
+            blocksToCreate.push({
+                uId: `blk-${idCounter++}`, category: category, class: cls, path: pathFunc
+            });
+        };
+
+        // A. PILES
+        for (let i = 0; i < PILE_H; i++) {
+            const yPos = GROUND_Y - (i * BLOCK_SIZE) - (BLOCK_SIZE/2);
+            const depL = i === 0 ? [] : [`pile-L-${i-1}`];
+            const depR = i === 0 ? [] : [`pile-R-${i-1}`];
+            register(`pile-L-${i}`, 'pile', 'fill-pile', getRectPath(BLOCK_SIZE, BLOCK_SIZE), CX - ARCH_RADIUS_INNER - (BLOCK_SIZE/2), yPos, 0, depL);
+            register(`pile-R-${i}`, 'pile', 'fill-pile', getRectPath(BLOCK_SIZE, BLOCK_SIZE), CX + ARCH_RADIUS_INNER + (BLOCK_SIZE/2), yPos, 0, depR);
+        }
+
+        // B. IMPOSTS
+        const impostY = GROUND_Y - (PILE_H * BLOCK_SIZE) - 10;
+        register('impost-L', 'impost', 'fill-impost', getRectPath(BLOCK_SIZE + 10, 20), CX - ARCH_RADIUS_INNER - (BLOCK_SIZE/2), impostY, 0, [`pile-L-${PILE_H-1}`]);
+        register('impost-R', 'impost', 'fill-impost', getRectPath(BLOCK_SIZE + 10, 20), CX + ARCH_RADIUS_INNER + (BLOCK_SIZE/2), impostY, 0, [`pile-R-${PILE_H-1}`]);
+
+        // C. CONTREFORTS
+        const buttressH = PILE_H * BLOCK_SIZE;
+        const buttressY = GROUND_Y - (buttressH/2);
+        register('buttress-L', 'buttress', 'fill-buttress', getRectPath(BUTTRESS_W, buttressH), CX - ARCH_RADIUS_INNER - BLOCK_SIZE - (BUTTRESS_W/2) - 2, buttressY, 0, ['impost-L']);
+        register('buttress-R', 'buttress', 'fill-buttress', getRectPath(BUTTRESS_W, buttressH), CX + ARCH_RADIUS_INNER + BLOCK_SIZE + (BUTTRESS_W/2) + 2, buttressY, 0, ['impost-R']);
+
+        // D. CINTRE
+        const arcCenterY = GROUND_Y - (PILE_H * BLOCK_SIZE) - 20; 
+        register('cintre-main', 'cintre', 'fill-cintre', getRealisticCintrePath(ARCH_RADIUS_INNER), CX, arcCenterY, 0, ['buttress-L', 'buttress-R']);
+
+        // E. VOÛTE
+        const numVoussoirs = 9;
+        const angleStep = 180 / numVoussoirs;
+        for (let i = 0; i < numVoussoirs; i++) {
+            const midAngle = 180 - (i * angleStep) - (angleStep/2);
+            const isKeystone = (i === 4);
+            const midRadius = ARCH_RADIUS_INNER + (ARCH_THICKNESS/2);
+            const rad = midAngle * (Math.PI / 180);
+            const tx = CX + Math.cos(rad) * midRadius;
+            const ty = arcCenterY - Math.sin(rad) * midRadius;
+            const rot = 90 - midAngle;
+            let category = isKeystone ? 'keystone' : 'voussoir';
+            let cls = isKeystone ? 'fill-keystone' : 'fill-arch';
+            
+            let deps = [];
+            if (i === 0 || i === 8) deps = ['cintre-main'];
+            else if (i < 4) deps = [`voussoir-${i-1}`];
+            else if (i > 4) deps = [`voussoir-${i+1}`];
+            else if (i === 4) deps = ['voussoir-3', 'voussoir-5'];
+
+            register(`voussoir-${i}`, category, cls, () => getArchPath(ARCH_RADIUS_INNER, ARCH_RADIUS_OUTER, angleStep), tx, ty, rot, deps);
+        }
+        return blocksToCreate;
+    }
+
+    // --- 2. DESSINS SVG ---
+
+    function getRealisticCintrePath(r) {
+        let d = `M ${-r} 0 A ${r} ${r} 0 0 1 ${r} 0 L ${-r} 0 Z `;
+        const beamW = 4;
+        d += `M ${-beamW} 0 L ${-beamW} ${-r+beamW*2} L ${beamW} ${-r+beamW*2} L ${beamW} 0 Z `;
+        const midBaseL = -r / 2;
+        const midBaseR = r / 2;
+        const angleDia = Math.PI / 4;
+        const diaX = Math.cos(angleDia) * (r - beamW*2);
+        const diaY = -Math.sin(angleDia) * (r - beamW*2);
+        d += `M ${midBaseL-beamW} 0 L ${-diaX-beamW} ${diaY} L ${-diaX+beamW} ${diaY} L ${midBaseL+beamW} 0 Z `;
+        d += `M ${midBaseR-beamW} 0 L ${diaX-beamW} ${diaY} L ${diaX+beamW} ${diaY} L ${midBaseR+beamW} 0 Z `;
+        d += `M ${-diaX} ${diaY+beamW} L ${diaX} ${diaY+beamW} L ${diaX} ${diaY-beamW} L ${-diaX} ${diaY-beamW} Z`;
+        return () => d;
+    }
+
+    function getArchPath(rIn, rOut, angleDeg) {
+        const angleRad = (angleDeg * Math.PI) / 180;
+        const half = angleRad / 2;
+        const yOffset = (rIn + rOut) / 2;
+        const x1 = Math.sin(-half) * rOut; const y1 = -Math.cos(-half) * rOut;
+        const x2 = Math.sin(half) * rOut;  const y2 = -Math.cos(half) * rOut;
+        const x3 = Math.sin(half) * rIn;   const y3 = -Math.cos(half) * rIn;
+        const x4 = Math.sin(-half) * rIn;  const y4 = -Math.cos(-half) * rIn;
+        return `M ${x1} ${y1 + yOffset} A ${rOut} ${rOut} 0 0 1 ${x2} ${y2 + yOffset} L ${x3} ${y3 + yOffset} A ${rIn} ${rIn} 0 0 0 ${x4} ${y4 + yOffset} Z`;
+    }
+
+    function getRectPath(w, h) {
+        return () => `M ${-w/2} ${-h/2} L ${w/2} ${-h/2} L ${w/2} ${h/2} L ${-w/2} ${h/2} Z`;
+    }
+
+    // --- 3. MOTEUR DU JEU ---
+
+    function initGame() {
+        layerTargets.innerHTML = '';
+        layerSnapped.innerHTML = '';
+        layerBlocks.innerHTML = '';
+        layerStructure.innerHTML = '';
+        tooltip.style.opacity = 0;
+        cintreRemoved = false;
+
+        const blocksData = createGameElements();
+        blocksData.sort(() => Math.random() - 0.5);
+
+        targets.forEach(t => {
+            const pathEl = document.createElementNS(SVG_NS, 'path');
+            pathEl.setAttribute('d', t.path());
+            pathEl.setAttribute('class', `target-shape target-locked ${t.class}`);
+            pathEl.setAttribute('transform', `translate(${t.x}, ${t.y}) rotate(${t.r})`);
+            layerTargets.appendChild(pathEl);
+            t.domElement = pathEl;
+        });
+
+        blocksData.forEach(b => {
+            const group = document.createElementNS(SVG_NS, 'g');
+            group.setAttribute('class', 'block-group');
+            group.dataset.category = b.category;
+            
+            const randX = 50 + Math.random() * 700;
+            const randY = 500 + Math.random() * 80;
+            const randRot = (Math.random() - 0.5) * 60;
+            setTransform(group, randX, randY, randRot);
+
+            const shape = document.createElementNS(SVG_NS, 'path');
+            shape.setAttribute('d', b.path());
+            shape.setAttribute('class', `block ${b.class}`);
+            group.appendChild(shape);
+            layerBlocks.appendChild(group);
+            group.addEventListener('mousedown', onStart);
+            group.addEventListener('touchstart', onStart, {passive: false});
+        });
+        updateGameTrace();
+    }
+
+    // --- LOGIQUE DE DÉPENDANCE & FIN ---
+
+    function updateGameTrace() {
+        if (cintreRemoved) return; // Jeu fini
+
+        // Vérification standard des dépendances
+        targets.forEach(target => {
+            if (target.occupied) return;
+            let dependenciesMet = true;
+            for (let depId of target.dependencies) {
+                const depTarget = targets.find(t => t.id === depId);
+                if (!depTarget || !depTarget.occupied) {
+                    dependenciesMet = false; break;
+                }
+            }
+            target.locked = !dependenciesMet;
+            if (dependenciesMet) target.domElement.classList.remove('target-locked');
+            else target.domElement.classList.add('target-locked');
+        });
+
+        const allStones = targets.filter(t => t.category !== 'cintre');
+        const allStonesPlaced = allStones.every(t => t.occupied);
+        const cintreTarget = targets.find(t => t.category === 'cintre');
+
+        // GESTION DES PHASES
+        const pilesDone = targets.filter(t => t.category === 'pile' && t.occupied).length === 12;
+        const impostsDone = targets.filter(t => t.category === 'impost' && t.occupied).length === 2;
+        const buttressDone = targets.filter(t => t.category === 'buttress' && t.occupied).length === 2;
+        const cintreDone = cintreTarget.occupied;
+
+        let phase = "Phase 1 : Montez les piles";
+        if (pilesDone && !impostsDone) phase = "Phase 2 : Posez les imposts";
+        else if (impostsDone && !buttressDone) phase = "Phase 3 : Renforcez avec les contreforts";
+        else if (buttressDone && !cintreDone) phase = "Phase 4 : Installez le cintre en bois";
+        else if (cintreDone && !allStonesPlaced) phase = "Phase 5 : Posez les voussoirs (Clé en dernier)";
+        else if (allStonesPlaced && cintreDone) {
+            // PHASE FINALE : Retrait du cintre
+            phase = "L'arc tient ! Retirez le cintre vers le bas !";
+            enableCintreRemoval();
+        }
+
+        statusEl.textContent = phase;
+    }
+
+    function enableCintreRemoval() {
+        // Trouver le bloc du cintre qui est dans layerStructure
+        const cintreBlock = layerStructure.querySelector('.block-group[data-category="cintre"]');
+        if (cintreBlock && !cintreBlock.classList.contains('ready-to-remove')) {
+            // On le rend interactif à nouveau
+            cintreBlock.classList.remove('snapped');
+            cintreBlock.classList.add('ready-to-remove'); // Marqueur
+            const shape = cintreBlock.querySelector('path');
+            shape.classList.add('removable-pulse');
+            
+            // On le remet dans le layerBlocks pour qu'il passe devant si on veut (optionnel)
+            // Mais pour le "tirer" de dessous, on peut le laisser ou le bouger.
+            // Le laisser dans layerStructure est plus logique physiquement (il est sous l'arche),
+            // mais on doit s'assurer que le pointer-events marche.
+            // .snapped avait pointer-events: none. On l'a retiré, donc c'est bon.
+        }
+    }
+
+    // --- INTERACTION ---
+
+    function findClosestTarget(blockCategory, x, y) {
+        let closest = null; let minDist = Infinity; const SNAP_DIST = 45;
+        targets.forEach(target => {
+            if (target.category !== blockCategory || target.occupied || target.locked) return;
+            const d = Math.hypot(x - target.x, y - target.y);
+            if (d < SNAP_DIST && d < minDist) { minDist = d; closest = target; }
+        });
+        return closest;
+    }
+
+    function clearTargetHighlights() {
+        targets.forEach(t => { if(!t.occupied && t.domElement) t.domElement.classList.remove('target-active'); });
+    }
+
+    function onStart(evt) {
+        // Si c'est 'snapped' et PAS 'ready-to-remove', on bloque
+        const group = evt.target.closest('.block-group');
+        if (!group) return;
+        if (group.classList.contains('snapped') && !group.classList.contains('ready-to-remove')) return;
+
+        evt.preventDefault();
+        selectedBlock = group;
+        
+        // Si on retire le cintre, on le garde dans son calque ou on le met devant ?
+        // Mieux vaut le laisser draggable.
+        const shape = selectedBlock.querySelector('path');
+        shape.classList.add('dragging');
+
+        const pt = getMousePos(evt);
+        offset.x = pt.x - parseFloat(selectedBlock.dataset.x);
+        offset.y = pt.y - parseFloat(selectedBlock.dataset.y);
+    }
+
+    function onMove(evt) {
+        if (!selectedBlock) {
+            const el = evt.target.closest('.block-group');
+            if (el) {
+                // Tooltip logic
+                const cat = el.dataset.category;
+                if (!el.classList.contains('snapped') || (cat === 'cintre' && el.classList.contains('ready-to-remove'))) {
+                    let name = cat.charAt(0).toUpperCase() + cat.slice(1);
+                    if(cat === 'keystone') name = "Clé de Voûte";
+                    if(cat === 'cintre') name = "Cintre en bois";
+                    tooltip.textContent = name; tooltip.style.opacity = 1;
+                    const t = evt.changedTouches ? evt.changedTouches[0] : evt;
+                    tooltip.style.left = (t.pageX + 15) + 'px'; tooltip.style.top = (t.pageY + 15) + 'px';
+                    return;
+                }
+            }
+            tooltip.style.opacity = 0;
+            return;
+        }
+
+        evt.preventDefault(); tooltip.style.opacity = 0;
+        const pt = getMousePos(evt);
+        const newX = pt.x - offset.x; const newY = pt.y - offset.y;
+        setTransform(selectedBlock, newX, newY, parseFloat(selectedBlock.dataset.r));
+        
+        // Si c'est pas le cintre final, on cherche une cible
+        if (!selectedBlock.classList.contains('ready-to-remove')) {
+            clearTargetHighlights();
+            const potentialTarget = findClosestTarget(selectedBlock.dataset.category, newX, newY);
+            if (potentialTarget) potentialTarget.domElement.classList.add('target-active');
+        }
+    }
+
+    function onEnd(evt) {
+        if (!selectedBlock) return;
+        selectedBlock.querySelector('path').classList.remove('dragging');
+        clearTargetHighlights();
+        
+        const x = parseFloat(selectedBlock.dataset.x);
+        const y = parseFloat(selectedBlock.dataset.y);
+
+        // CAS SPÉCIAL : RETRAIT DU CINTRE
+        if (selectedBlock.classList.contains('ready-to-remove')) {
+            // Si on l'a descendu assez bas (distance > 100px du centre original)
+            const cintreTarget = targets.find(t => t.category === 'cintre');
+            const dist = Math.hypot(x - cintreTarget.x, y - cintreTarget.y);
+            
+            if (dist > 60) {
+                // VICTOIRE !
+                cintreRemoved = true;
+                selectedBlock.style.opacity = '0'; // Disparait
+                statusEl.textContent = "CONSTRUCTION RÉUSSIE ! L'ARC TIENT !";
+                statusEl.style.color = "#2ecc71";
+                setTimeout(() => alert("Félicitations ! Vous avez construit un arc romain stable."), 200);
+            } else {
+                // Il revient à sa place (magnétisme inverse)
+                setTransform(selectedBlock, cintreTarget.x, cintreTarget.y, cintreTarget.r);
+            }
+            selectedBlock = null;
+            return;
+        }
+
+        // CAS NORMAL
+        const target = findClosestTarget(selectedBlock.dataset.category, x, y);
+        if (target) snapBlockToTarget(selectedBlock, target);
+        selectedBlock = null;
+    }
+
+    function snapBlockToTarget(blockEl, targetObj) {
+        targetObj.occupied = true;
+        setTransform(blockEl, targetObj.x, targetObj.y, targetObj.r);
+        blockEl.classList.add('snapped');
+        
+        if (targetObj.category === 'cintre') layerStructure.appendChild(blockEl);
+        else layerSnapped.appendChild(blockEl);
+        
+        updateGameTrace();
+    }
+
+    function getMousePos(evt) {
+        const t = evt.changedTouches ? evt.changedTouches[0] : evt;
+        const CTM = svg.getScreenCTM();
+        return { x: (t.clientX - CTM.e) / CTM.a, y: (t.clientY - CTM.f) / CTM.d };
+    }
+
+    function setTransform(el, x, y, r) {
+        el.setAttribute('transform', `translate(${x}, ${y}) rotate(${r})`);
+        el.dataset.x = x; el.dataset.y = y; el.dataset.r = r;
+    }
+
+    window.addEventListener('mousemove', onMove); window.addEventListener('mouseup', onEnd);
+    window.addEventListener('touchmove', onMove, {passive: false}); window.addEventListener('touchend', onEnd);
+    initGame();
+</script>
+</body>
+</html>
