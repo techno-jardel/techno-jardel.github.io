@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Puzzle Anneaux avec Boutons</title>
+  <style>
+    body {
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      gap: 20px;
+    }
+    canvas {
+      border: 2px solid #fff;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    button {
+      background: #444;
+      color: white;
+      border: none;
+      padding: 15px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #666;
+    }
+  </style>
+</head>
+<body>
+
+<button id="rotateLeft">⟲</button>
+<canvas id="puzzle" width="500" height="500"></canvas>
+<button id="rotateRight">⟳</button>
+
+<script>
+const canvas = document.getElementById('puzzle');
+const ctx = canvas.getContext('2d');
+const img = new Image();
+img.src = "mosaic-1.jpg"; // ton image locale
+
+const rings = 5;
+const ringRotations = Array(rings).fill(0);
+let selectedRing = null;
+
+img.onload = () => {
+  for (let i = 0; i < rings; i++) {
+    ringRotations[i] = Math.random() * 2 * Math.PI;
+  }
+  drawPuzzle();
+};
+
+function drawPuzzle() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+  const maxRadius = canvas.width / 2;
+
+  for (let r = 0; r < rings; r++) {
+    const innerRadius = (r / rings) * maxRadius;
+    const outerRadius = ((r + 1) / rings) * maxRadius;
+
+    ctx.save();
+    ctx.translate(centerX, centerY);
+    ctx.rotate(ringRotations[r]);
+
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.arc(0, 0, outerRadius, 0, 2 * Math.PI);
+    ctx.arc(0, 0, innerRadius, 2 * Math.PI, 0, true);
+    ctx.closePath();
+    ctx.clip();
+
+    ctx.drawImage(img, -centerX, -centerY, canvas.width, canvas.height);
+    ctx.restore();
+
+    // Optionnel : surligner l’anneau sélectionné
+    if (r === selectedRing) {
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.beginPath();
+      ctx.arc(0, 0, outerRadius, 0, 2 * Math.PI);
+      ctx.arc(0, 0, innerRadius, 2 * Math.PI, 0, true);
+      ctx.closePath();
+      ctx.strokeStyle = "yellow";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+}
+
+canvas.addEventListener('click', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left - canvas.width / 2;
+  const y = e.clientY - rect.top - canvas.height / 2;
+  const dist = Math.sqrt(x * x + y * y);
+  const maxRadius = canvas.width / 2;
+
+  for (let r = 0; r < rings; r++) {
+    const inner = (r / rings) * maxRadius;
+    const outer = ((r + 1) / rings) * maxRadius;
+    if (dist >= inner && dist < outer) {
+      selectedRing = r;
+      drawPuzzle();
+      break;
+    }
+  }
+});
+
+document.getElementById('rotateLeft').addEventListener('click', () => {
+  if (selectedRing !== null) {
+    ringRotations[selectedRing] -= Math.PI / 12; // -15°
+    drawPuzzle();
+  }
+});
+
+document.getElementById('rotateRight').addEventListener('click', () => {
+  if (selectedRing !== null) {
+    ringRotations[selectedRing] += Math.PI / 12; // +15°
+    drawPuzzle();
+  }
+});
+</script>
+
+</body>
+</html>
