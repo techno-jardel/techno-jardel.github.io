@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Effet Scratch Fluide</title>
+<style>
+  body {
+    background:#f0f0f0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+  }
+
+  .scratch-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .scratch-container img {
+    display: block;
+    user-select: none;
+  }
+
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: crosshair;
+  }
+</style>
+</head>
+<body>
+
+<div class="scratch-container">
+  <!-- Image à révéler -->
+  <img id="revealed" src="recette-mortier.png" width="611" height="575">
+
+  <!-- Canvas avec l'image à gratter -->
+  <canvas id="scratch"></canvas>
+</div>
+
+<script>
+const canvas = document.getElementById('scratch');
+const ctx = canvas.getContext('2d');
+const imgBelow = document.getElementById('revealed');
+
+// Image du dessus (celle qu'on va gratter)
+const imgTop = new Image();
+imgTop.src = "recette-mortier-sale.png"; // <-- remplace par ton JPEG
+
+imgTop.onload = () => {
+  canvas.width = imgBelow.width;
+  canvas.height = imgBelow.height;
+
+  // Dessine l'image du dessus
+  ctx.drawImage(imgTop, 0, 0, canvas.width, canvas.height);
+
+  // Paramètres de la brosse fluide
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
+  ctx.lineWidth = 40; // épaisseur de la brosse
+};
+
+let isDrawing = false;
+let lastX = 0;
+let lastY = 0;
+
+function getPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: (e.clientX || e.touches?.[0].clientX) - rect.left,
+    y: (e.clientY || e.touches?.[0].clientY) - rect.top
+  };
+}
+
+function scratch(e) {
+  if (!isDrawing) return;
+
+  const pos = getPos(e);
+
+  ctx.globalCompositeOperation = "destination-out";
+  ctx.beginPath();
+  ctx.moveTo(lastX, lastY);
+  ctx.lineTo(pos.x, pos.y);
+  ctx.stroke();
+
+  lastX = pos.x;
+  lastY = pos.y;
+}
+
+canvas.addEventListener("mousedown", (e) => {
+  isDrawing = true;
+  const pos = getPos(e);
+  lastX = pos.x;
+  lastY = pos.y;
+});
+
+canvas.addEventListener("mouseup", () => isDrawing = false);
+canvas.addEventListener("mouseleave", () => isDrawing = false);
+canvas.addEventListener("mousemove", scratch);
+
+// Support mobile
+canvas.addEventListener("touchstart", (e) => {
+  isDrawing = true;
+  const pos = getPos(e);
+  lastX = pos.x;
+  lastY = pos.y;
+});
+
+canvas.addEventListener("touchend", () => isDrawing = false);
+canvas.addEventListener("touchmove", scratch);
+</script>
+
+</body>
+</html>
