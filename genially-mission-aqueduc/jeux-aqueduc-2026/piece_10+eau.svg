@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.2"
+   viewBox="11000 26000 2001 2001"
+   id="svg8"
+   sodipodi:docname="piece_10+eau.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview8"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.87556222"
+     inkscape:cx="1000.5"
+     inkscape:cy="1000.5"
+     inkscape:window-width="3840"
+     inkscape:window-height="2054"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g8" />
+  <g
+     class="Group"
+     id="g8">
+    <g
+       class="com.sun.star.drawing.CustomShape"
+       id="g1">
+      <g
+         id="id215">
+        <rect
+           class="BoundingBox"
+           stroke="none"
+           fill="none"
+           x="11000"
+           y="26000"
+           width="2001"
+           height="2001"
+           id="rect1" />
+        <path
+           fill="rgb(114,159,207)"
+           fill-opacity="0.102"
+           stroke="none"
+           d="M 12000,28000 L 11000,28000 11000,26000 13000,26000 13000,28000 12000,28000 Z "
+           id="path1" />
+      </g>
+    </g>
+    <g
+       class="com.sun.star.drawing.PolyPolygonShape"
+       id="g2">
+      <g
+         id="id216">
+        <rect
+           class="BoundingBox"
+           stroke="none"
+           fill="none"
+           x="11000"
+           y="27500"
+           width="1001"
+           height="501"
+           id="rect2" />
+        <path
+           fill="rgb(255,128,0)"
+           stroke="none"
+           d="M 12000,27625 L 11906,27625 11906,27531 11938,27531 11938,27500 11563,27500 11563,27531 11594,27531 11594,27625 11000,27625 11000,27813 11594,27813 11594,27906 11500,28000 12000,28000 11906,27906 11906,27813 12000,27813 12000,27625 Z "
+           id="path2" />
+      </g>
+    </g>
+    <g
+       class="com.sun.star.drawing.PolyPolygonShape"
+       id="g3">
+      <g
+         id="id217">
+        <rect
+           class="BoundingBox"
+           stroke="none"
+           fill="none"
+           x="11000"
+           y="27531"
+           width="1001"
+           height="376"
+           id="rect3" />
+        <path
+           fill="rgb(255,219,182)"
+           stroke="none"
+           d="M 12000,27656 L 11875,27656 11875,27531 11625,27531 11625,27656 11000,27656 11000,27781 11625,27781 11625,27906 11875,27906 11875,27781 12000,27781 12000,27656 Z "
+           id="path3" />
+      </g>
+    </g>
+    <g
+       class="com.sun.star.drawing.PolyPolygonShape"
+       id="g3-4"
+       transform="translate(417,7)">
+      <g
+         id="id217-5">
+        <rect
+           class="BoundingBox"
+           stroke="none"
+           fill="none"
+           x="11000"
+           y="27531"
+           width="1001"
+           height="376"
+           id="rect3-5" />
+        <path
+           fill="#ffdbb6"
+           stroke="none"
+           d="m 11583.125,27649.147 h -125 v -125 l -127.793,-3.427 c 0,0 -4.408,380.342 -7.995,380.711 l 135.788,-2.284 v -125 h 125 z"
+           id="path3-1"
+           style="fill:#5fd3bc"
+           sodipodi:nodetypes="ccccccccc" />
+      </g>
+    </g>
+    <g
+       class="Group"
+       id="g5">
+      <g
+         class="com.sun.star.drawing.PolyPolygonShape"
+         id="g4">
+        <g
+           id="id218">
+          <rect
+             class="BoundingBox"
+             stroke="none"
+             fill="none"
+             x="11530"
+             y="27250"
+             width="440"
+             height="627"
+             id="rect4" />
+          <path
+             fill="rgb(237,76,5)"
+             stroke="none"
+             d="M 11844,27438 L 11969,27438 11969,27500 11844,27500 11844,27875 11656,27875 11656,27500 11531,27500 11531,27438 11656,27438 11656,27250 11844,27250 11844,27438 Z "
+             id="path4" />
+        </g>
+      </g>
+    </g>
+    <g
+       class="com.sun.star.drawing.PolyPolygonShape"
+       id="g6">
+      <g
+         id="id219">
+        <rect
+           class="BoundingBox"
+           stroke="none"
+           fill="none"
+           x="12000"
+           y="26717"
+           width="1001"
+           height="1096"
+           id="rect5" />
+        <path
+           fill="rgb(255,128,0)"
+           stroke="none"
+           d="M 13000,26718 L 12937,26718 12937,26843 12531,26843 12531,27625 12000,27625 12000,27812 12718,27812 12718,27031 12937,27031 12937,27156 13000,27156 13000,26718 Z "
+           id="path5" />
+      </g>
+    </g>
+    <g
+       class="com.sun.star.drawing.PolyPolygonShape"
+       id="g7">
+      <g
+         id="id220">
+        <rect
+           class="BoundingBox"
+           stroke="none"
+           fill="none"
+           x="12000"
+           y="26843"
+           width="1001"
+           height="939"
+           id="rect6" />
+        <path
+           fill="rgb(255,219,182)"
+           stroke="none"
+           d="M 13000,26843 L 13000,26875 12562,26875 12562,27656 12000,27656 12000,27781 12625,27781 12687,27781 12687,27000 13000,27000 13000,26843 Z "
+           id="path6" />
+      </g>
+    </g>
+  </g>
+  <path
+     fill="#ffdbb6"
+     stroke="none"
+     d="m 13000.091,26843.656 v 94.817 l -439.142,2.284 1.142,715.899 h -562 v 125 h 625 62 v -781 h 313 z"
+     id="path8-8"
+     sodipodi:nodetypes="ccccccccccc"
+     style="fill:#5fd3bc" />
+</svg>

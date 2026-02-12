@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.2"
+   viewBox="13997 23000 2001 2001"
+   id="svg51"
+   sodipodi:docname="piece_2+eau.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs51" />
+  <sodipodi:namedview
+     id="namedview51"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.87556222"
+     inkscape:cx="1000.5"
+     inkscape:cy="1184.3818"
+     inkscape:window-width="3840"
+     inkscape:window-height="2054"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg51" />
+  <g
+     class="com.sun.star.drawing.CustomShape"
+     id="g2">
+    <g
+       id="id91">
+      <rect
+         class="BoundingBox"
+         stroke="none"
+         fill="none"
+         x="13998"
+         y="23750"
+         width="2002"
+         height="1251"
+         id="rect2" />
+      <path
+         fill="#ff8000"
+         stroke="none"
+         d="m 14999,25000 h -1001 v -1250 h 2001 v 1250 z"
+         id="path2" />
+    </g>
+  </g>
+  <g
+     class="com.sun.star.drawing.EllipseShape"
+     id="g3">
+    <g
+       id="id92">
+      <rect
+         class="BoundingBox"
+         stroke="none"
+         fill="none"
+         x="13997"
+         y="23062"
+         width="1564"
+         height="689"
+         id="rect3" />
+      <path
+         fill="#ff8000"
+         stroke="none"
+         d="m 13997,23750 c 0,-121 36,-239 105,-344 68,-105 167,-191 286,-252 119,-60 253,-92 391,-92 137,0 271,32 390,92 119,61 218,147 286,252 69,105 105,223 105,344 z"
+         id="path3" />
+    </g>
+  </g>
+  <g
+     class="com.sun.star.drawing.PolyPolygonShape"
+     id="g4">
+    <g
+       id="id93">
+      <rect
+         class="BoundingBox"
+         stroke="none"
+         fill="none"
+         x="14059"
+         y="23061"
+         width="1939"
+         height="1877"
+         id="rect4" />
+      <path
+         fill="#ffdbb6"
+         stroke="none"
+         d="m 14060,23687 h 1437 v -562 h 62 v -63 h 375 v 1563 h 63 v 312 h -63 v 0 h -1874 v -1000 h 3 v -250 z"
+         id="path4" />
+    </g>
+  </g>
+  <g
+     class="com.sun.star.drawing.EllipseShape"
+     id="g5">
+    <g
+       id="id94">
+      <rect
+         class="BoundingBox"
+         stroke="none"
+         fill="none"
+         x="14059"
+         y="23125"
+         width="1439"
+         height="626"
+         id="rect5" />
+      <path
+         fill="#ffdbb6"
+         stroke="none"
+         d="m 14059,23750 c 0,-110 33,-217 96,-312 63,-96 154,-174 264,-229 109,-55 233,-84 359,-84 126,0 250,29 360,84 109,55 200,133 263,229 63,95 96,202 96,312 z"
+         id="path5" />
+    </g>
+  </g>
+  <g
+     class="com.sun.star.drawing.CustomShape"
+     id="g6">
+    <g
+       id="id95">
+      <rect
+         class="BoundingBox"
+         stroke="none"
+         fill="none"
+         x="15747"
+         y="24563"
+         width="251"
+         height="63"
+         id="rect6" />
+      <path
+         fill="#ff8000"
+         stroke="none"
+         d="m 15872,24625 h -125 v -62 h 250 v 62 z"
+         id="path6" />
+    </g>
+  </g>
+  <g
+     class="com.sun.star.drawing.CustomShape"
+     id="g7">
+    <g
+       id="id96">
+      <rect
+         class="BoundingBox"
+         stroke="none"
+         fill="none"
+         x="15497"
+         y="23125"
+         width="63"
+         height="563"
+         id="rect7" />
+      <path
+         fill="#ff8000"
+         stroke="none"
+         d="m 15528,23687 h -31 v -562 h 62 v 562 z"
+         id="path7" />
+    </g>
+  </g>
+  <g
+     class="com.sun.star.drawing.CustomShape"
+     id="g8"
+     transform="matrix(1.0543868,0,0,1.0145958,-866.59964,-337.51385)">
+    <g
+       id="id97">
+      <rect
+         class="BoundingBox"
+         stroke="none"
+         fill="none"
+         x="15934"
+         y="23124"
+         width="63"
+         height="626"
+         id="rect8" />
+      <path
+         fill="#ff8000"
+         stroke="none"
+         d="m 15965,23749 h -31 v -625 h 62 v 625 z"
+         id="path8" />
+    </g>
+  </g>
+  <g
+     class="com.sun.star.drawing.CustomShape"
+     id="g9">
+    <g
+       id="id98">
+      <rect
+         class="BoundingBox"
+         stroke="none"
+         fill="none"
+         x="15623"
+         y="23062"
+         width="64"
+         height="63"
+         id="rect9" />
+      <path
+         fill="#ff8000"
+         stroke="none"
+         d="m 15655,23124 h -32 v -62 h 63 v 62 z"
+         id="path9" />
+    </g>
+  </g>
+  <g
+     class="com.sun.star.drawing.CustomShape"
+     id="g10">
+    <g
+       id="id99">
+      <rect
+         class="BoundingBox"
+         stroke="none"
+         fill="none"
+         x="15747"
+         y="23063"
+         width="64"
+         height="63"
+         id="rect10" />
+      <path
+         fill="#ff8000"
+         stroke="none"
+         d="m 15779,23125 h -32 v -62 h 63 v 62 z"
+         id="path10" />
+    </g>
+  </g>
+  <g
+     class="com.sun.star.drawing.CustomShape"
+     id="g11">
+    <g
+       id="id100">
+      <rect
+         class="BoundingBox"
+         stroke="none"
+         fill="none"
+         x="15872"
+         y="23063"
+         width="64"
+         height="63"
+         id="rect11" />
+      <path
+         fill="#ff8000"
+         stroke="none"
+         d="m 15904,23125 h -32 v -62 h 63 v 62 z"
+         id="path11" />
+    </g>
+  </g>
+  <g
+     class="com.sun.star.drawing.CustomShape"
+     id="g49"
+     transform="matrix(0.99999996,0,0,1.0557875,-4.5684928,-1391.1741)">
+    <g
+       id="id101">
+      <rect
+         class="BoundingBox"
+         stroke="none"
+         fill="none"
+         x="14063"
+         y="23811"
+         width="1689"
+         height="1126"
+         id="rect12" />
+      <defs
+         id="defs12">
+        <clipPath
+           id="clip_path_1"
+           clipPathUnits="userSpaceOnUse">
+          <path
+             d="m 14907,24936 h -844 v -1125 h 1688 v 1125 z"
+             id="path12" />
+        </clipPath>
+      </defs>
+      <g
+         clip-path="url(#clip_path_1)"
+         id="g48">
+        <image
+           x="13920"
+           y="23669"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image12" />
+        <image
+           x="14202"
+           y="23669"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image13" />
+        <image
+           x="14484"
+           y="23669"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image14" />
+        <image
+           x="14766"
+           y="23669"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image15" />
+        <image
+           x="15048"
+           y="23669"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image16" />
+        <image
+           x="15330"
+           y="23669"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image17" />
+        <image
+           x="15612"
+           y="23669"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image18" />
+        <image
+           x="13638"
+           y="23951"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image19" />
+        <image
+           x="13920"
+           y="23951"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image20" />
+        <image
+           x="14202"
+           y="23951"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image21" />
+        <image
+           x="14484"
+           y="23951"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image22" />
+        <image
+           x="14766"
+           y="23951"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image23" />
+        <image
+           x="15048"
+           y="23951"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image24" />
+        <image
+           x="15330"
+           y="23951"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image25" />
+        <image
+           x="15612"
+           y="23951"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image26" />
+        <image
+           x="13920"
+           y="24233"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image27" />
+        <image
+           x="14202"
+           y="24233"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image28" />
+        <image
+           x="14484"
+           y="24233"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image29" />
+        <image
+           x="14766"
+           y="24233"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image30" />
+        <image
+           x="15048"
+           y="24233"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image31" />
+        <image
+           x="15330"
+           y="24233"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image32" />
+        <image
+           x="15612"
+           y="24233"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image33" />
+        <image
+           x="13638"
+           y="24515"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image34" />
+        <image
+           x="13920"
+           y="24515"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image35" />
+        <image
+           x="14202"
+           y="24515"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image36" />
+        <image
+           x="14484"
+           y="24515"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image37" />
+        <image
+           x="14766"
+           y="24515"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image38" />
+        <image
+           x="15048"
+           y="24515"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image39" />
+        <image
+           x="15330"
+           y="24515"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image40" />
+        <image
+           x="15612"
+           y="24515"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image41" />
+        <image
+           x="13920"
+           y="24797"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image42" />
+        <image
+           x="14202"
+           y="24797"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image43" />
+        <image
+           x="14484"
+           y="24797"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image44" />
+        <image
+           x="14766"
+           y="24797"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image45" />
+        <image
+           x="15048"
+           y="24797"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image46" />
+        <image
+           x="15330"
+           y="24797"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image47" />
+        <image
+           x="15612"
+           y="24797"
+           width="282"
+           height="282"
+           preserveAspectRatio="none"
+           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsVAAALFQGAmdiDAAAAI0lEQVQImWP8f3sbAzbAhFUUIcGo6oUmwUiuUURJQOzDaQcAw6gIno0fvrUAAAAASUVORK5CYII="
+           id="image48" />
+      </g>
+    </g>
+  </g>
+  <path
+     style="display:inline;fill:#5fd3bc;stroke:#fffefd;stroke-width:2;paint-order:stroke fill markers"
+     d="m 14056.972,24936.523 1690.275,1.751 0.271,-61.653 251.096,-2.45 -0.502,-126.542 -1938.833,8.561 z"
+     id="path1"
+     sodipodi:nodetypes="ccccccc"
+     inkscape:label="eau" />
+  <g
+     class="com.sun.star.drawing.CustomShape"
+     id="g50">
+    <g
+       id="id102">
+      <rect
+         class="BoundingBox"
+         stroke="none"
+         fill="none"
+         x="15747"
+         y="24875"
+         width="251"
+         height="63"
+         id="rect49" />
+      <path
+         fill="#ff8000"
+         stroke="none"
+         d="m 15872,24937 h -125 v -62 h 250 v 62 z"
+         id="path49" />
+    </g>
+  </g>
+</svg>

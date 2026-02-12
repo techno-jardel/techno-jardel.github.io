@@ -1,0 +1,53 @@
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="8000 26000 2001 2001"><svg:g class="Group">
+       <svg:g class="com.sun.star.drawing.CustomShape">
+        <svg:g id="id172">
+         <svg:rect class="BoundingBox" stroke="none" fill="none" x="8000" y="26000" width="2001" height="2001" />
+         <svg:path fill="rgb(114,159,207)" fill-opacity="0.102" stroke="none" d="M 9000,28000 L 8000,28000 8000,26000 10000,26000 10000,28000 9000,28000 Z " />
+        </svg:g>
+       </svg:g>
+       <svg:g class="com.sun.star.drawing.PolyPolygonShape">
+        <svg:g id="id173">
+         <svg:rect class="BoundingBox" stroke="none" fill="none" x="8000" y="27500" width="1001" height="501" />
+         <svg:path fill="rgb(255,128,0)" stroke="none" d="M 9000,27625 L 8906,27625 8906,27531 8938,27531 8938,27500 8563,27500 8563,27531 8594,27531 8594,27625 8000,27625 8000,27813 8594,27813 8594,27906 8500,28000 9000,28000 8906,27906 8906,27813 9000,27813 9000,27625 Z " />
+        </svg:g>
+       </svg:g>
+       <svg:g class="com.sun.star.drawing.PolyPolygonShape">
+        <svg:g id="id174">
+         <svg:rect class="BoundingBox" stroke="none" fill="none" x="7999" y="27531" width="1002" height="376" />
+         <svg:path fill="rgb(255,219,182)" stroke="none" d="M 9000,27656 L 8875,27656 8875,27531 8625,27531 8625,27656 8000,27656 8000,27781 8625,27781 8625,27906 8875,27906 8875,27781 9000,27781 9000,27656 Z " />
+        </svg:g>
+       </svg:g>
+       <svg:g class="Group">
+        <svg:g class="com.sun.star.drawing.PolyPolygonShape">
+         <svg:g id="id175">
+          <svg:rect class="BoundingBox" stroke="none" fill="none" x="8531" y="27250" width="439" height="627" />
+          <svg:path fill="rgb(237,76,5)" stroke="none" d="M 8844,27438 L 8969,27438 8969,27500 8844,27500 8844,27875 8656,27875 8656,27500 8531,27500 8531,27438 8656,27438 8656,27250 8844,27250 8844,27438 Z " />
+         </svg:g>
+        </svg:g>
+        <svg:g class="com.sun.star.drawing.CustomShape">
+         <svg:g id="id176">
+          <svg:rect class="BoundingBox" stroke="none" fill="none" x="8686" y="27635" width="128" height="180" />
+          <svg:path fill="rgb(255,219,182)" stroke="none" d="M 8686,27725 C 8686,27740 8689,27756 8695,27769 8700,27783 8708,27794 8718,27802 8727,27810 8738,27814 8750,27814 8761,27814 8772,27810 8781,27802 8791,27794 8799,27783 8804,27769 8810,27756 8813,27740 8813,27725 8813,27709 8810,27693 8804,27680 8799,27666 8791,27655 8781,27647 8772,27639 8761,27635 8750,27635 8738,27635 8727,27639 8718,27647 8708,27655 8700,27666 8695,27680 8689,27693 8686,27709 8686,27725 L 8686,27725 Z " />
+         </svg:g>
+        </svg:g>
+        <svg:g class="com.sun.star.drawing.CustomShape">
+         <svg:g id="id177">
+          <svg:rect class="BoundingBox" stroke="none" fill="none" x="8717" y="27281" width="85" height="105" />
+          <svg:path fill="rgb(255,255,255)" stroke="none" d="M 8759,27385 L 8717,27385 8717,27281 8801,27281 8801,27385 8759,27385 Z " />
+         </svg:g>
+        </svg:g>
+       </svg:g>
+       <svg:g class="com.sun.star.drawing.PolyPolygonShape">
+        <svg:g id="id178">
+         <svg:rect class="BoundingBox" stroke="none" fill="none" x="9000" y="26717" width="1001" height="1096" />
+         <svg:path fill="rgb(255,128,0)" stroke="none" d="M 10000,26718 L 9937,26718 9937,26843 9531,26843 9531,27625 9000,27625 9000,27812 9718,27812 9718,27031 9937,27031 9937,27156 10000,27156 10000,26718 Z " />
+        </svg:g>
+       </svg:g>
+       <svg:g class="com.sun.star.drawing.PolyPolygonShape">
+        <svg:g id="id179">
+         <svg:rect class="BoundingBox" stroke="none" fill="none" x="9000" y="26843" width="1001" height="939" />
+         <svg:path fill="rgb(255,219,182)" stroke="none" d="M 10000,26843 L 10000,26875 9562,26875 9562,27656 9000,27656 9000,27781 9625,27781 9687,27781 9687,27000 10000,27000 10000,26843 Z " />
+        </svg:g>
+       </svg:g>
+      </svg:g>
+      </svg>
