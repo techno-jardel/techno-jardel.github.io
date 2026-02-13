@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Poulies Romaines</title>
+    <style>
+        body { margin: 0; padding: 0; background-color: transparent; font-family: sans-serif; }
+        #conteneur { text-align: center; width: 100%; }
+        select {
+            background: #e3d5b8; /* Parchemin */
+            border: 2px solid #8B4513; /* Bois sombre */
+            color: #3e2723;
+            padding: 5px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        canvas { display: block; margin: 0 auto; cursor: pointer; }
+    </style>
+</head>
+
+<body>  
+    <div id="conteneur">
+        <div id="commande">
+            <select id="liste" name="liste">
+                <option value="0">Poulie simple</option>
+                <option value="1">Poulie mobile (a)</option>
+                <option value="3">Palan 3 brins</option>
+                <option value="4">Palan 4 brins</option>
+            </select>
+        </div>
+        
+        <div id="canv">
+            <canvas id="canvas" width="320" height="600"></canvas>
+        </div>
+    </div>
+                
+<script type="text/javascript">
+    // Initialisation
+    var canvas = document.getElementById('canvas'); 
+    var hh = canvas.getContext('2d');
+    var choice = document.getElementById("liste");
+    hh.translate(0.5,0.5);
+
+    // Variables globales
+    var Xs, Ys;
+    var xc1=90, yc1=560, r=6;
+    var xcmin=60, xcmax=160;
+    var ycmin=140, ycmax=240;
+    var xmini=50, xmaxi=550;
+    var test=false;
+    var mode=0, Xd=80, Yd=60;
+    var R=30, L, L0, ld, hd=260, M=200;
+    var phi=0;
+    var Xc, Yc, xp=105, x, y;
+    var drap=false;
+
+    // --- PALETTE DE COULEURS ---
+    var colBoisClair = "#DEB887"; 
+    var colBoisFonce = "#8B4513"; 
+    var colPierre = "#A9A9A9";    
+    var colPierreContour = "#696969"; 
+    var colCorde = "#8B4513";     
+    var colMetal = "#2F4F4F";     
+    var colParchemin = "#e3d5b8";
+
+    // Lancement initial
+    trace();
+                        
+    // Gestion du menu déroulant
+    choice.addEventListener('change', function() {
+        mode = parseInt(choice.options[choice.selectedIndex].value); 
+        switch (mode){
+            case 0: xcmin=60;   xcmax=160;  xmini=50;   xmaxi=550;
+                    M=200;      xc1=90;     yc1=560;
+                    Yd=45;      xp=105;     drap=false;
+                    break;
+            case 1: xcmin=50;   xcmax=150;  xmini=100;   xmaxi=1100;
+                    M=400;      xc1=80;     yc1=560;
+                    Yd=60;      xp=105;     drap=false;
+                    break;
+            case 2: ycmin=250;  ycmax=550;  yc1=250;
+                    M=600;      xc1=200;    drap=true;
+                    break;
+            case 3: xcmin=30;   xcmax=130;  xmini=150;   xmaxi=1650;
+                    M=600;      xc1=60;     yc1=560;
+                    Yd=60;      xp=165;     drap=false; 
+                    break;
+            case 4: xcmin=30;   xcmax=130;  xmini=200;   xmaxi=2200;
+                    M=800;      xc1=60;     yc1=560;
+                    Yd=60;      xp=165;     drap=false;
+                    break;
+            case 5: ycmin=150;  ycmax=350;  yc1=150;
+                    M=600;      xc1=280;    drap=true;
+        }                          
+        trace();
+    });
+                        
+    // --- Fonctions Utilitaires ---
+
+    function drawLine(xi,yi,xf,yf){
+        hh.beginPath();
+        hh.moveTo(xi,yi);
+        hh.lineTo(xf,yf);
+        hh.stroke();
+    }
+
+    function cercle(xc,yc,R,flag){
+        hh.beginPath();
+        hh.arc(xc,yc,R,0,Math.PI*2,true);
+        if(flag) hh.fill();
+        else hh.stroke();
+    }
+    
+    function cadre3D(x,y,w,ha){
+        // Vide pour supprimer le cadre gris
+    }  
+
+    // Gestion de la souris
+    document.addEventListener("mousedown", function(evt) {
+        var cRect = canvas.getBoundingClientRect();
+        var x = Math.round(evt.clientX - cRect.left);
+        var y = Math.round(evt.clientY - cRect.top); 
+        Xs=x-3;   Ys=y-3;
+        if ((Xs>xc1-4)&&(Xs<xc1+4)&&(Ys>yc1-4)&&(Ys<yc1+4)) test=true;
+        trace();
+    });
+
+    window.addEventListener("mouseup", function(evt) {
+        test=false;  
+        trace();
+    });
+
+    document.addEventListener("mousemove", function(evt) {
+        var cRect = canvas.getBoundingClientRect();
+        var x = Math.round(evt.clientX - cRect.left);
+        var y = Math.round(evt.clientY - cRect.top); 
+        Xs=x-3;   Ys=y-3;
+        
+        // Curseur main si on survole le bouton
+        if((Xs>xc1-4)&&(Xs<xc1+4)&&(Ys>yc1-4)&&(Ys<yc1+4)) document.body.style.cursor='pointer';
+        else document.body.style.cursor='auto';
+        
+        if ((test)&&(!drap)){
+            xc1=Xs;
+            if (xc1<xcmin) xc1=xcmin;
+            if (xc1>xcmax) xc1=xcmax;
+            M=xmini+(xc1-xcmin)*(xmaxi-xmini)/100;
+        }
+        if ((test)&&(drap)){
+            yc1=Ys;
+            if (yc1<ycmin) yc1=ycmin;
+            if (yc1>ycmax) yc1=ycmax;
+        }
+        trace();
+    });
+
+    // --- Affichage des éléments ---
+
+    function metrix(xori,yori,c,val,unit){
+        // MODIFICATION : Style parchemin au lieu du cadre vert
+        var large=85, haut=30;
+        
+        // Fond Parchemin
+        hh.fillStyle = colParchemin;     
+        hh.fillRect(xori,yori,large,haut);
+        
+        // Bordure bois
+        hh.strokeStyle = colBoisFonce;
+        hh.lineWidth = 2;       
+        hh.strokeRect(xori,yori,large,haut);
+        
+        // Texte
+        var s = "Masse: " + val.toFixed(0) + " " + unit;
+        hh.fillStyle = "#3e2723"; // Encre foncée       
+        hh.font = "bold 13px Arial";
+        hh.fillText(s, xori+8, yori+20);
+        
+        // Reset ligne
+        hh.lineWidth = 1;
+    }
+
+    function curseur(){
+        hh.fillStyle="rgb(0,0,0)";
+        hh.font="bold 12px Arial";
+        hh.lineJoin="round";
+        hh.lineWidth=3;
+        hh.strokeStyle=colBoisFonce; // Rail en bois
+        drawLine(xcmin,yc1,xcmax,yc1);                    
+        hh.lineWidth=1.8;
+        hh.strokeStyle="rgba(255,255,255,0.5)";
+        drawLine(xcmin,yc1+1,xcmax,yc1+1);
+        if (test) hh.fillStyle=colBoisClair;
+        else hh.fillStyle=colPierre; // Bouton en pierre
+        hh.strokeStyle="black";
+        hh.lineWidth=1.5;
+        cercle(xc1,yc1,r,true);
+        cercle(xc1,yc1,r,false);
+    }
+
+    function dynamometre(){
+        hh.strokeStyle = "black";
+        var j=0;
+        hh.font="bold 11px Arial";
+        hh.fillStyle=colBoisClair;  hh.fillRect(Xd+xp,Yd+hd,30,150); // Corps
+        hh.strokeStyle=colBoisFonce;    hh.strokeRect(Xd+xp,Yd+hd,30,150);
+        hh.strokeStyle="black"; 
+        drawLine(Xd+xp+15,Yd+hd+150,Xd+xp+15,Yd+hd+170);
+        hh.fillStyle=colBoisFonce;           hh.fillRect(Xd+xp-5,Yd+hd+170,40,10);    //socle
+        drawLine(Xd+xp-3,Yd+ld+162,Xd+xp+33,Yd+ld+162);
+        hh.strokeStyle="black";
+        hh.fillStyle="black";
+        for (var i=0; i<150; i+=12){
+            if (i%24===0){
+                drawLine(Xd+xp,Yd+hd+145-i,Xd+xp+5,Yd+hd+145-i);
+                hh.fillText(""+j+".0",Xd+xp+9,Yd+hd+148-i);
+                j++;
+            }
+            else drawLine(Xd+xp,Yd+hd+145-i,Xd+xp+3,Yd+hd+145-i);
+        }
+        hh.fillStyle="#F5DEB3"; hh.fillRect(Xd+xp-3,Yd+ld,36,161); // Curseur interne
+        hh.strokeStyle="black"; hh.strokeRect(Xd+xp-3,Yd+ld,36,175);
+        hh.fillStyle="black";
+        hh.font="bold 16px Arial";  hh.fillText("N",Xd+xp+8,Yd+ld+50);
+        hh.strokeStyle="red"; //index
+        drawLine(Xd+xp-3,Yd+ld+170,Xd+xp+33,Yd+ld+170);
+    }
+
+    function poulie_fixe(){
+        hh.strokeStyle = colCorde;
+        R=45;   L0=180;
+        Xc=155; Yc=90;
+        ld=235-24*M/100;    L=L0+24*M/100;
+        phi=1.*(L-L0)/R;
+        hh.lineWidth=1.5;
+        x=R*Math.cos(phi);  y=R*Math.sin(phi);
+        hh.lineWidth=5;
+        // Poulie Bois
+        hh.fillStyle=colBoisFonce; cercle(Xc,Yc,R,true);
+        hh.strokeStyle="black"; cercle(Xc,Yc,R,false);
+
+        hh.lineWidth=1.5;
+        hh.fillStyle=colMetal;
+        cercle(Xc,Yc,5,true); // Axe
+        hh.strokeStyle = colCorde;
+        drawLine(Xc,Yc,Xc+x,Yc-y);  drawLine(Xc,Yc,Xc-x,Yc+y);
+        drawLine(Xc,Yc,Xc-y,Yc-x);  drawLine(Xc,Yc,Xc+y,Yc+x);
+        drawLine(Xd+30,Yd+L,Xd+30,Yd+R);
+        drawLine(Xd+120,Yd+ld,Xd+120,Yd+R);
+        hh.fillStyle=colPierre;    hh.fillRect(Xd,Yd+L,60,M/10); // Masse Pierre
+        hh.strokeStyle=colPierreContour; hh.strokeRect(Xd,Yd+L,60,M/10);
+        dynamometre();
+    }
+
+    function poulie_mobile(){
+        hh.strokeStyle = colCorde;
+        R=30;   L0=220;
+        Xc=170; Yc=90;      
+        ld=235-12*M/100;        L=L0+6*M/100;
+        phi=1.0*(L-L0)/R;
+        hh.lineWidth=1.5;
+        x=R*Math.cos(phi);  y=R*Math.sin(phi);
+        
+        // Poulie haut
+        hh.fillStyle=colBoisFonce; cercle(Xc,Yc,R,true);
+        hh.strokeStyle="black"; cercle(Xc,Yc,R,false);
+        
+        // Point fixe
+        hh.fillStyle=colMetal;              cercle(Xd,Yd,5,true);
+        hh.strokeStyle = colCorde;
+        drawLine(Xc,Yc,Xc+x,Yc-y);      drawLine(Xc,Yc,Xc-x,Yc+y);
+        drawLine(Xc,Yc,Xc-y,Yc-x);      drawLine(Xc,Yc,Xc+y,Yc+x);
+        drawLine(Xd,Yd,Xd,Yd+L);
+        drawLine(Xd+2*R,Yd+L,Xd+2*R,Yd+R);
+        hh.strokeStyle="black";
+        hh.lineWidth=1.5;
+        hh.fillStyle=colMetal;
+        cercle(Xc,Yc,5,true);
+
+        hh.strokeStyle=colCorde;
+        drawLine(Xd+4*R,Yd+L,Xd+4*R,Yd+R);  
+        drawLine(Xd+R,Yd+L,Xd+R,Yd+L+50);
+        Xc=110;     Yc=Yd+L;
+
+        // Poulie mobile
+        hh.fillStyle=colBoisFonce; cercle(Xc,Yc,R,true);
+        hh.strokeStyle="black"; cercle(Xc,Yc,R,false);
+        hh.lineWidth=1.5;
+        hh.strokeStyle=colCorde;
+        drawLine(Xc,Yc,Xc+x,Yc-y);  drawLine(Xc,Yc,Xc-x,Yc+y);
+        drawLine(Xc,Yc,Xc-y,Yc-x);  drawLine(Xc,Yc,Xc+y,Yc+x);
+        hh.fillStyle=colMetal;  cercle(Xd+R,Yd+L,5,true);
+
+        // Masse Pierre
+        hh.fillStyle=colPierre; hh.fillRect(Xd,Yd+L+50,2*R,(M-50)/20);
+        hh.strokeStyle=colPierreContour;    hh.strokeRect(Xd,Yd+L+50,2*R,(M-50)/20);        
+        dynamometre();
+    }
+
+
+    function palan4(){
+        hh.strokeStyle = colCorde;
+        R1=24;
+        R=30;   
+        ld=235-6*M/100;
+        L=257+1.5*M/100;
+        cercle(Xd+5*R,Yd+R,3,true);
+        
+        // Poulies
+        hh.fillStyle=colBoisFonce;      cercle(Xd+5*R,Yd+R,R,true);
+        hh.strokeStyle="black"; cercle(Xd+5*R,Yd+R,R,false);
+        hh.fillStyle=colMetal;  cercle(Xd+5*R,Yd+R,3,true);
+        hh.strokeStyle="black"; cercle(Xd+5*R,Yd+R,3,false);
+        hh.lineWidth=1.5;
+        hh.strokeStyle = colCorde;
+        drawLine(Xd,Yd+R1+67,Xd+R1,Yd+L+R1-63);
+        
+        hh.lineWidth=1; 
+        hh.fillStyle=colBoisFonce;
+        cercle(Xd,Yd+R,R,true); cercle(Xd,Yd+R,R,false); 
+        cercle(Xd,Yd+95,R1,true); cercle(Xd,Yd+95,R1,false);
+
+        hh.lineWidth=9;
+        hh.strokeStyle=colBoisFonce; // Support entre poulies
+        drawLine(Xd,Yd+R-5,Xd,Yd+R1+75);
+        hh.lineWidth=1.5;
+        hh.fillStyle=colMetal;
+        cercle(Xd,Yd+R,2,true);
+        cercle(Xd,Yd+R1+68,2,true);
+        hh.strokeStyle=colCorde;
+        drawLine(Xd,Yd,Xd+5*R,Yd);
+        
+        hh.fillStyle=colBoisFonce;
+        cercle(Xd+5*R,Yd+R,R,true);    //fin des fixes
+        hh.strokeStyle="black"; cercle(Xd+5*R,Yd+R,R,false);
+        hh.lineWidth=1.5;
+        hh.strokeStyle=colCorde;
+        drawLine(Xd+6*R,Yd+L,Xd+6*R,Yd+R);  //fil dynamometre 
+        
+        hh.fillStyle=colBoisFonce;
+        cercle(Xd,Yd+L-36,R1,true);  hh.strokeStyle="black"; cercle(Xd,Yd+L-36,R1,false);
+        cercle(Xd,Yd+L+R,R, true);   hh.strokeStyle="black"; cercle(Xd,Yd+L+R,R, false);
+
+        hh.strokeStyle=colBoisFonce;        
+        hh.lineWidth=9;
+        drawLine(Xd,Yd+L+R1-65,Xd,Yd+L+38);
+        hh.lineWidth=2.5;
+        drawLine(Xd,Yd+L+R1-60,Xd,Yd+L+80);
+        hh.lineWidth=1.5;
+        hh.strokeStyle="black";
+        hh.fillStyle=colMetal;
+        cercle(Xd,Yd+L+28,2,true);  cercle(Xd,Yd+L-60+R1,2,true);       
+        hh.fillStyle=colPierre;         hh.fillRect(Xd-R,Yd+L+80,2*R,(M-50)/40);
+        hh.strokeStyle=colPierreContour; hh.strokeRect(Xd-R,Yd+L+80,2*R,(M-50)/40);
+        //cables
+        hh.strokeStyle=colCorde;
+        drawLine(Xd-R1,Yd+R1+L-63,Xd-R1,Yd+R1+70);
+        drawLine(Xd+R1,Yd+R1+70,Xd+R,Yd+L+30);
+        drawLine(Xd-R,Yd+L+30,Xd-R,Yd+R);
+        dynamometre();
+    }
+
+    function palan3(){
+        hh.strokeStyle=colCorde;
+        R1=24;
+        R=30;   
+        ld=235-8*M/100;             L=250+2.66*M/100;
+        cercle(Xd+5*R,Yd+R,3,true);
+        hh.fillStyle=colBoisFonce;      cercle(Xd+5*R,Yd+R,R,true);
+        hh.strokeStyle="black"; cercle(Xd+5*R,Yd+R,R,false);
+        hh.fillStyle=colMetal;  cercle(Xd+5*R,Yd+R,3,true);//fixes
+        hh.strokeStyle="black"; cercle(Xd+5*R,Yd+R,3,false);
+        hh.lineWidth=1.5;
+        
+        hh.fillStyle=colBoisFonce;
+        cercle(Xd,Yd+R,R,true);     hh.strokeStyle="black"; cercle(Xd,Yd+R,R,false);
+        cercle(Xd,Yd+95,R1,true);   hh.strokeStyle="black"; cercle(Xd,Yd+95,R1,false);
+        hh.lineWidth=9;
+        hh.strokeStyle=colBoisFonce;
+        drawLine(Xd,Yd+R-5,Xd,Yd+R1+75);
+        hh.lineWidth=1.5;
+        hh.fillStyle=colMetal;
+        cercle(Xd,Yd+R,2,true);
+        cercle(Xd,Yd+R1+68,2,true);
+        hh.strokeStyle=colCorde;
+        drawLine(Xd,Yd,Xd+5*R,Yd);
+        hh.lineWidth=5; 
+        hh.fillStyle=colBoisFonce;
+        cercle(Xd+5*R,Yd+R,R,true); hh.strokeStyle="black"; cercle(Xd+5*R,Yd+R,R,false);
+        hh.lineWidth=1.5;
+        hh.strokeStyle=colCorde;
+        drawLine(Xd+6*R,Yd+L,Xd+6*R,Yd+R);//fil dynamometre 
+        
+        hh.fillStyle=colBoisFonce;
+        cercle(Xd,Yd+L+R,R, true); hh.strokeStyle="black"; cercle(Xd,Yd+L+R,R, false);  
+        hh.strokeStyle=colBoisFonce;        
+        hh.lineWidth=9;
+        drawLine(Xd,Yd+L+R1-65,Xd,Yd+L+38);
+        hh.lineWidth=2.5;
+        drawLine(Xd,Yd+L+R1-60,Xd,Yd+L+80);
+        hh.lineWidth=1.5;
+        hh.strokeStyle="black";
+        hh.fillStyle=colMetal;
+        cercle(Xd,Yd+L+28,2,true);  cercle(Xd,Yd+L-60+R1,2,true);       
+        hh.fillStyle=colPierre;             hh.fillRect(Xd-R,Yd+L+80,2*R,(M-50)/40);
+        hh.strokeStyle=colPierreContour; hh.strokeRect(Xd-R,Yd+L+80,2*R,(M-50)/40);
+        hh.strokeStyle=colCorde;
+        drawLine(Xd,Yd+R1+L-63,Xd-R1-2,Yd+R1+70);
+        drawLine(Xd+R1,Yd+R1+70,Xd+R,Yd+L+30);
+        drawLine(Xd-R,Yd+L+30,Xd-R,Yd+R);
+        dynamometre();
+    }
+
+    function trace(){
+        hh.font="12px Arial";
+        // EFFACEMENT DU FOND (TRANSPARENCE)
+        hh.clearRect(0,0,320,600);
+        
+        switch (mode){
+            case 0: poulie_fixe();      break;
+            case 1: poulie_mobile();    break;
+            case 3: palan3();           break;
+            case 4: palan4();           break;
+        }
+        if(!drap){    
+            curseur();
+            hh.lineWidth="1";
+            // Appel modifié sans le code couleur '1' (vert)
+            metrix(200,530,1,M,'g');
+        }
+        hh.lineWidth="1";
+        cadre3D(20,20,300,580);
+    }
+</script>           
+</body>
+</html>
