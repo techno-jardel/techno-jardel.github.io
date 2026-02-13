@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Aqueduc Romain - Le Défi de l'Architecte</title>
+    <style>
+        :root {
+            --cell-size: 15px; 
+            --piece-size: 60px; 
+            --grid-cols: 78;
+            --grid-rows: 36;
+            --board-width: calc(var(--grid-cols) * var(--cell-size));
+            --board-height: calc(var(--grid-rows) * var(--cell-size));
+            --color-bg-out: #3e2723;
+        }
+
+        /* Nettoyage visuel et blocage des interactions parasites */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #121212; color: #eee; margin: 0; padding: 0;
+            display: flex; flex-direction: column; align-items: center;
+            height: 100vh; overflow: hidden;
+        }
+
+        h1 { font-size: 1.2rem; margin: 5px; text-align: center; color: #d4af37; text-shadow: 1px 1px 2px black; }
+
+        .controls { position: absolute; top: 5px; right: 15px; display: flex; gap: 8px; z-index: 2000; }
+        
+        .scroll-window {
+            flex: 1; width: 98vw; margin: 0 auto;
+            background-color: var(--color-bg-out); border: 2px solid #5d4037;
+            overflow: auto; position: relative;
+        }
+
+        .game-board {
+            width: calc(var(--grid-cols) * var(--cell-size));
+            height: calc(var(--grid-rows) * var(--cell-size));
+            background-image: url('background.svg');
+            background-size: 100% 100%; position: relative;
+            background-color: #261a18;
+        }
+
+        .piece-container {
+            width: var(--piece-size); height: var(--piece-size);
+            position: absolute; z-index: 50; cursor: grab; overflow: hidden;
+        }
+
+        .piece-container.fixed { cursor: default; }
+
+        .piece-img, .water-layer {
+            width: 100%; height: 100%; position: absolute;
+            top: 0; left: 0; pointer-events: none; object-fit: contain;
+        }
+
+        .water-layer {
+            z-index: 2;
+            clip-path: inset(0 100% 0 0); 
+            transition: none;
+            visibility: hidden;
+        }
+
+        /* --- ANIMATIONS DE FLUX --- */
+        .flow-right .water-layer { clip-path: inset(0 0 0 0); transition: clip-path 0.5s linear; visibility: visible; }
+        .flow-left-prepare .water-layer { clip-path: inset(0 0 0 100%); transition: none; visibility: visible; }
+        .flow-left .water-layer { clip-path: inset(0 0 0 0); transition: clip-path 0.5s linear; visibility: visible; }
+        .flow-down-prepare .water-layer { clip-path: inset(0 0 100% 0); transition: none; visibility: visible; }
+        .flow-down .water-layer { clip-path: inset(0 0 0 0); transition: clip-path 0.5s linear; visibility: visible; }
+        .flow-4-part1-prepare .water-layer { clip-path: inset(0 0 0 100%); transition: none; visibility: visible; }
+        .flow-4-part1 .water-layer { clip-path: inset(0 0 0 50%); transition: clip-path 0.25s linear; visibility: visible; }
+        .flow-4-part2 .water-layer { clip-path: inset(0 0 0 0); transition: clip-path 0.25s linear; visibility: visible; }
+
+        .dragging { opacity: 0.7; z-index: 1000; }
+
+        .inventory {
+            height: 80px; width: 100%; flex-shrink: 0; background: #aab7b8;
+            border-top: 4px solid #4e342e; display: flex; align-items: center; padding: 0 10px; gap: 10px; overflow-x: auto;
+        }
+
+        .inventory-slot {
+            min-width: 60px; height: 60px; background: rgba(255,255,255,0.2);
+            border: 1px solid #795548; border-radius: 4px;
+            display: flex; justify-content: center; align-items: center; flex-shrink: 0;
+        }
+
+        #status-msg { 
+            position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.9); padding: 12px 30px; border-radius: 30px;
+            font-weight: bold; display: none; z-index: 3000; border: 2px solid #00e5ff; color: #00e5ff;
+            text-align: center;
+        }
+
+        #status-msg.victory { border-color: #d4af37; color: #d4af37; box-shadow: 0 0 25px rgba(212, 175, 55, 0.6); }
+
+        button { padding: 6px 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn-water { background: #0288d1; color: white; }
+        .btn-reset { background: #d32f2f; color: white; }
+    </style>
+</head>
+<body>
+
+    <h1>Architecte Romain : Complétez l'Aqueduc</h1>
+
+    <div class="controls">
+        <button class="btn-water" id="btn-play" onclick="startWaterFlow()">🌊 Mise en eau</button>
+        <button class="btn-reset" onclick="location.reload()">🔄 Reset</button>
+    </div>
+
+    <div id="status-msg"></div>
+
+    <div class="scroll-window">
+        <div class="game-board" id="board-container"></div>
+    </div>
+
+    <div class="inventory" id="inventory"></div>
+
+    <script>
+        const CELL_SIZE = 15;
+        let isSimulating = false;
+
+        const CORRIGE = [
+            {"id":"2","x":2,"y":5,"r":0}, {"id":"6","x":6,"y":5,"r":0}, {"id":"0","x":10,"y":7,"r":0},
+            {"id":"5","x":14,"y":6,"r":0}, {"id":"6","x":18,"y":6,"r":0}, {"id":"5","x":22,"y":7,"r":0},
+            {"id":"7","x":26,"y":8,"r":0}, {"id":"7","x":30,"y":8,"r":0}, {"id":"7","x":34,"y":8,"r":0},
+            {"id":"7","x":38,"y":8,"r":0}, {"id":"7","x":42,"y":8,"r":0}, {"id":"7","x":46,"y":8,"r":0},
+            {"id":"7","x":50,"y":8,"r":0}, {"id":"5","x":54,"y":8,"r":0}, {"id":"7","x":58,"y":9,"r":0},
+            {"id":"6","x":62,"y":8,"r":0}, {"id":"6","x":66,"y":8,"r":0}, {"id":"6","x":70,"y":8,"r":0},
+            {"id":"17","x":74,"y":10,"r":0},
+            {"id":"13","x":26,"y":12,"r":0}, {"id":"12","x":30,"y":12,"r":0}, {"id":"11","x":34,"y":12,"r":0},
+            {"id":"11","x":38,"y":12,"r":0}, {"id":"14","x":42,"y":12,"r":0}, {"id":"6","x":74,"y":18,"r":0},
+            {"id":"3","x":70,"y":20,"r":0}, {"id":"4","x":66,"y":23,"r":0}, {"id":"15","x":66,"y":27,"r":0},
+            {"id":"3","x":62,"y":24,"r":0}, {"id":"6","x":58,"y":24,"r":0}, {"id":"6","x":54,"y":24,"r":0},
+            {"id":"7","x":50,"y":25,"r":0}, {"id":"7","x":46,"y":25,"r":0}, {"id":"7","x":42,"y":25,"r":0},
+            {"id":"7","x":38,"y":25,"r":0}, {"id":"7","x":34,"y":25,"r":0}, {"id":"0","x":30,"y":26,"r":0},
+            {"id":"1","x":26,"y":26,"r":0}, {"id":"8","x":22,"y":27,"r":0}, {"id":"9","x":18,"y":27,"r":0}
+        ];
+
+        const PIECES_GUIDES = ["3", "5", "17", "9"];
+        const PIECES_EXCLUES = ["10", "16"];
+
+        const boardContainer = document.getElementById('board-container');
+        const inventory = document.getElementById('inventory');
+        let draggedItem = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initInventory();
+            initGuides(); 
+        });
+
+        function initInventory() {
+            for (let i = 0; i < 18; i++) {
+                // On cache les guides et les pièces exclues de l'inventaire
+                if (PIECES_GUIDES.includes(i.toString()) || PIECES_EXCLUES.includes(i.toString())) continue;
+                
+                const slot = document.createElement('div');
+                slot.className = 'inventory-slot';
+                slot.appendChild(createPiece(i));
+                inventory.appendChild(slot);
+            }
+        }
+
+        function initGuides() {
+            CORRIGE.forEach(item => {
+                if (PIECES_GUIDES.includes(item.id)) {
+                    const guide = createPiece(item.id);
+                    guide.classList.add('fixed');
+                    guide.style.left = (item.x * CELL_SIZE) + 'px';
+                    guide.style.top = (item.y * CELL_SIZE) + 'px';
+                    // La rotation est fixée à 0 par défaut
+                    guide.removeEventListener('mousedown', startDrag);
+                    boardContainer.appendChild(guide);
+                }
+            });
+        }
+
+        function createPiece(index) {
+            const container = document.createElement('div');
+            container.className = 'piece-container';
+            container.dataset.pieceIndex = index;
+            container.innerHTML = `<img src="piece_${index}.svg" class="piece-img"><img src="piece_${index}+eau.svg" class="water-layer">`;
+            
+            // Uniquement le drag, plus de listener pour la rotation
+            container.addEventListener('mousedown', startDrag);
+            return container;
+        }
+
+        function startDrag(e) {
+            if (isSimulating) return;
+            let target = e.target.closest('.piece-container');
+            if (!target || target.classList.contains('fixed')) return;
+
+            if (target.parentElement.classList.contains('inventory-slot')) {
+                draggedItem = createPiece(target.dataset.pieceIndex);
+                boardContainer.appendChild(draggedItem);
+                const br = boardContainer.getBoundingClientRect();
+                draggedItem.style.left = (e.clientX - br.left - 30) + 'px';
+                draggedItem.style.top = (e.clientY - br.top - 30) + 'px';
+            } else { draggedItem = target; }
+
+            draggedItem.classList.add('dragging');
+            const rect = draggedItem.getBoundingClientRect();
+            let offX = e.clientX - rect.left; let offY = e.clientY - rect.top;
+
+            const onMouseMove = (ev) => {
+                const br = boardContainer.getBoundingClientRect();
+                draggedItem.style.left = Math.round((ev.clientX - br.left - offX) / CELL_SIZE) * CELL_SIZE + 'px';
+                draggedItem.style.top = Math.round((ev.clientY - br.top - offY) / CELL_SIZE) * CELL_SIZE + 'px';
+            };
+            const onMouseUp = () => {
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+                if (draggedItem) draggedItem.classList.remove('dragging');
+                draggedItem = null;
+            };
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        }
+
+        async function startWaterFlow() {
+            if (isSimulating) return;
+            isSimulating = true;
+            const msg = document.getElementById('status-msg');
+            msg.classList.remove('victory');
+            msg.style.display = 'block';
+            msg.innerText = "🌊 L'eau progresse...";
+
+            document.querySelectorAll('.piece-container').forEach(p => {
+                p.classList.remove('flow-right', 'flow-left', 'flow-left-prepare', 'flow-down', 'flow-down-prepare', 'flow-4-part1', 'flow-4-part1-prepare', 'flow-4-part2');
+            });
+
+            const piecesPosees = Array.from(boardContainer.querySelectorAll('.piece-container'));
+
+            for (let i = 0; i < CORRIGE.length; i++) {
+                const sol = CORRIGE[i];
+                if (["11", "12", "13", "14"].includes(sol.id)) continue;
+
+                const piece = piecesPosees.find(p => 
+                    Math.abs(parseInt(p.style.left)/CELL_SIZE - sol.x) < 0.5 && 
+                    Math.abs(parseInt(p.style.top)/CELL_SIZE - sol.y) < 0.5
+                );
+
+                if (!piece || piece.dataset.pieceIndex !== sol.id) {
+                    msg.innerText = "❌ Le flux est interrompu !";
+                    isSimulating = false;
+                    return;
+                }
+
+                if (sol.id === "4") {
+                    piece.classList.add('flow-4-part1-prepare');
+                    await new Promise(r => setTimeout(r, 20));
+                    piece.classList.add('flow-4-part1');
+                    await new Promise(r => setTimeout(r, 250)); 
+                } 
+                else if (i <= 18) {
+                    piece.classList.add('flow-right');
+                    await new Promise(r => setTimeout(r, 450));
+                } 
+                else if (i >= 25) {
+                    piece.classList.add('flow-left-prepare');
+                    await new Promise(r => setTimeout(r, 20));
+                    piece.classList.add('flow-left');
+                    await new Promise(r => setTimeout(r, 450));
+                    
+                    if (sol.id === "15") {
+                        const piece4 = piecesPosees.find(p => p.dataset.pieceIndex === "4");
+                        if (piece4) {
+                            piece4.classList.add('flow-4-part2');
+                            await new Promise(r => setTimeout(r, 250));
+                        }
+                    }
+                }
+                else if (i === 24) {
+                    piece.classList.add('flow-down-prepare');
+                    await new Promise(r => setTimeout(r, 20));
+                    piece.classList.add('flow-down');
+                    await new Promise(r => setTimeout(r, 450));
+                }
+                else {
+                    piece.classList.add('flow-right');
+                    await new Promise(r => setTimeout(r, 450));
+                }
+            }
+            msg.classList.add('victory');
+            msg.innerText = "Bravo ! Vous avez gagné un indice : U";
+            isSimulating = false;
+        }
+    </script>
+</body>
+</html>
