@@ -8,12 +8,12 @@
         /* Styles généraux optimisés pour iframe */
         body {
             font-family: 'Times New Roman', Times, serif;
-            background-color: #f4f4f4;
+            background-color: transparent; /* <-- FOND TRANSPARENT ICI */
             color: #2c1a16;
             text-align: center;
             margin: 0;
-            padding: 5px; /* Marges réduites */
-            overflow-x: hidden; /* Évite les barres de défilement horizontales */
+            padding: 5px; 
+            overflow-x: hidden; 
         }
 
         /* Bannière de titre réduite */
@@ -29,7 +29,7 @@
 
         /* Plateau de jeu réduit */
         #game-board {
-            width: 468px; /* Réduit à 60% de l'original */
+            width: 468px; 
             height: 288px;
             background-image: url('board.png');
             background-size: contain;
@@ -45,7 +45,7 @@
             display: flex;
             justify-content: center;
             position: absolute;
-            gap: 3px; /* Écartement proportionnel */
+            gap: 3px; 
             width: 100%; 
             left: 0;
         }
@@ -107,14 +107,14 @@
         /* Zone de tuiles en vrac */
         #tiles-area {
             min-height: 80px;
-            max-width: 468px; /* S'aligne avec la largeur du plateau */
+            max-width: 468px; 
             margin: 0 auto;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 8px; /* Espacement réduit */
+            gap: 8px; 
             padding: 15px 10px;
-            background-color: #e8e8e8;
+            background-color: #e8e8e8; /* Garde une légère couleur pour identifier la zone de dépôt */
             border: 2px solid #d0d0d0;
             border-radius: 8px;
             box-sizing: border-box;
