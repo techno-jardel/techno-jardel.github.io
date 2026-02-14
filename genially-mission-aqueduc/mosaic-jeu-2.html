@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Mosaïque : AQUA POTABILIS</title>
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f4f4f4;
+            color: #2c1a16;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Bannière de titre */
+        #game-title {
+            width: 580px;
+            height: 75px;
+            background-image: url('banner.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0 auto 10px;
+        }
+
+        p.instructions {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Conteneur principal de la grille (Le plateau) */
+        #game-board {
+            width: 780px;
+            height: 480px;
+            background-image: url('board.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: inline-block;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        /* Les lignes de la grille centrées horizontalement */
+        .grid-row {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            gap: 5px; /* <-- L'ESPACE A ÉTÉ RÉDUIT ICI (anciennement 15px) */
+            width: 100%; 
+            left: 0;
+        }
+
+        /* Positionnement vertical ajusté pour les carreaux plus grands */
+        #grid-row-1 { top: 135px; } /* Ligne 1 */
+        #grid-row-2 { top: 225px; } /* Ligne 2 */
+        #grid-row-3 { top: 315px; } /* Ligne 3 */
+
+        /* Les emplacements de la grille (Agrandis) */
+        .slot {
+            width: 75px;
+            height: 75px;
+            border: 1px dashed rgba(255, 255, 255, 0.4); 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        /* Bouton Valider et Messages */
+        .controls {
+            margin: 20px 0;
+        }
+
+        #validate-btn {
+            background-color: #a55341;
+            color: #f4ebd8;
+            border: 2px solid #8a3b2a;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-family: 'Times New Roman', Times, serif;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
+        }
+
+        #validate-btn:hover {
+            background-color: #c06c5a;
+        }
+
+        #validate-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
+        }
+
+        #result-message {
+            display: none;
+            margin: 15px auto 30px auto;
+            padding: 15px;
+            max-width: 500px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 20px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+        }
+
+        .success {
+            background-color: #d4af37;
+            color: #fff;
+            border: 2px solid #b8860b;
+        }
+
+        .error {
+            background-color: #c0392b;
+            color: #fff;
+            border: 2px solid #922b21;
+        }
+
+        /* Zone de départ des tuiles en vrac */
+        #tiles-area {
+            min-height: 120px;
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px;
+            background-color: #e8e8e8;
+            border: 3px solid #d0d0d0;
+            border-radius: 10px;
+        }
+
+        /* STYLE DES TUILES (Agrandies) */
+        .tile {
+            width: 75px;
+            height: 75px;
+            background-color: #f4e7d3;
+            border: 4px solid #a55341;
+            box-shadow: 0 0 0 3px #3d5a73, 3px 3px 6px rgba(0,0,0,0.4); 
+            font-size: 42px; 
+            font-family: 'Times New Roman', serif;
+            font-weight: bold;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            user-select: none;
+            box-sizing: border-box;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+        }
+
+        .tile:active {
+            cursor: grabbing;
+            box-shadow: 0 0 0 3px #3d5a73, 1px 1px 3px rgba(0,0,0,0.6);
+        }
+
+        /* Effet visuel lors du survol d'une zone de dépôt */
+        .drag-over {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: #f1c40f;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-title"></div>
+    <p class="instructions">Glissez et déposez les blocs sur la grille. Cliquez sur un bloc pour le faire pivoter.<br>Recomposez l'inscription latine puis validez. (N'oubliez pas le carreau vide !)</p>
+
+    <div id="game-board">
+        <div id="grid-row-1" class="grid-row"></div>
+        <div id="grid-row-2" class="grid-row"></div>
+        <div id="grid-row-3" class="grid-row"></div>
+    </div>
+
+    <div class="controls">
+        <button id="validate-btn">Valider la fresque</button>
+    </div>
+    
+    <div id="result-message"></div>
+
+    <div id="tiles-area" class="drop-zone">
+        </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const targetWord = "AQUA POTABILIS";
+            const letters = targetWord.split(''); 
+            
+            const gridRow1 = document.getElementById('grid-row-1');
+            const gridRow2 = document.getElementById('grid-row-2');
+            const gridRow3 = document.getElementById('grid-row-3');
+            const tilesArea = document.getElementById('tiles-area');
+            const validateBtn = document.getElementById('validate-btn');
+            const resultMessage = document.getElementById('result-message');
+
+            // 1. Fonction pour créer les emplacements
+            function createSlots(start, end, container) {
+                for (let i = start; i < end; i++) {
+                    const slot = document.createElement('div');
+                    slot.className = 'slot drop-zone';
+                    slot.dataset.expected = letters[i];
+                    container.appendChild(slot);
+                }
+            }
+
+            // Répartition sur 3 lignes (6, 6, 2)
+            createSlots(0, 6, gridRow1);   
+            createSlots(6, 12, gridRow2);  
+            createSlots(12, 14, gridRow3); 
+
+
+            // 2. Créer et mélanger les tuiles
+            letters.forEach((letter, index) => {
+                const tile = document.createElement('div');
+                tile.className = 'tile';
+                tile.draggable = true;
+                tile.id = 'tile-' + index;
+                tile.dataset.letter = letter;
+                tile.textContent = letter; 
+
+                let initialRot = Math.floor(Math.random() * 4) * 90;
+                tile.dataset.rotation = initialRot;
+                tile.style.transform = `rotate(${initialRot}deg)`;
+
+                tilesArea.appendChild(tile);
+
+                // Rotation
+                tile.addEventListener('click', (e) => {
+                    if (tile.getAttribute('draggable') === 'false') return; 
+                    let rot = parseInt(tile.dataset.rotation) + 90;
+                    tile.dataset.rotation = rot;
+                    tile.style.transform = `rotate(${rot}deg)`;
+                    resultMessage.style.display = 'none';
+                });
+
+                // Glisser-déposer
+                tile.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', tile.id);
+                    setTimeout(() => tile.style.opacity = '0.8', 0);
+                    resultMessage.style.display = 'none'; 
+                });
+
+                tile.addEventListener('dragend', (e) => {
+                    tile.style.opacity = '1';
+                });
+            });
+
+            Array.from(tilesArea.children).forEach(tile => {
+                tile.style.order = Math.floor(Math.random() * 100);
+            });
+
+            // 3. Zones de dépôt
+            const dropZones = document.querySelectorAll('.drop-zone');
+            
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault(); 
+                    if(zone.classList.contains('slot')) {
+                        zone.classList.add('drag-over');
+                    }
+                });
+
+                zone.addEventListener('dragleave', (e) => {
+                    zone.classList.remove('drag-over');
+                });
+
+                zone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+                    
+                    const draggedTileId = e.dataTransfer.getData('text/plain');
+                    const draggedTile = document.getElementById(draggedTileId);
+
+                    if (!draggedTile) return;
+
+                    if (this.id === 'tiles-area') {
+                        this.appendChild(draggedTile);
+                    } else if (this.classList.contains('slot')) {
+                        if (this.children.length > 0) {
+                            const existingTile = this.children[0];
+                            document.getElementById('tiles-area').appendChild(existingTile);
+                        }
+                        this.appendChild(draggedTile);
+                    }
+                });
+            });
+
+            // 4. Validation
+            validateBtn.addEventListener('click', () => {
+                const slots = document.querySelectorAll('.grid-row .slot');
+                let isWinner = true;
+                let isComplete = true;
+
+                slots.forEach(slot => {
+                    if (slot.children.length > 0) {
+                        const tile = slot.children[0];
+                        const letter = tile.dataset.letter;
+                        const rotation = parseInt(tile.dataset.rotation);
+                        const normalizedRotation = rotation % 360;
+                        
+                        let isRotationValid = (normalizedRotation === 0);
+                        
+                        if (['I', 'O', 'S'].includes(letter) && normalizedRotation === 180) {
+                            isRotationValid = true;
+                        }
+                        if (letter === ' ') {
+                            isRotationValid = true;
+                        }
+                        
+                        if (letter !== slot.dataset.expected || !isRotationValid) {
+                            isWinner = false;
+                        }
+                    } else {
+                        isWinner = false;
+                        isComplete = false;
+                    }
+                });
+
+                resultMessage.style.display = 'block';
+                
+                if (isWinner) {
+                    resultMessage.textContent = "Opus Perfectum ! La phrase est correcte, l'eau coule !";
+                    resultMessage.className = 'success';
+                    document.querySelectorAll('.tile').forEach(t => {
+                        t.style.boxShadow = "0 0 0 3px #f1c40f, 0 0 15px #f1c40f";
+                        t.style.borderColor = "#f1c40f";
+                        t.draggable = false;
+                        t.style.cursor = "default";
+                    });
+                    validateBtn.style.display = 'none';
+                } else if (!isComplete) {
+                    resultMessage.textContent = "La fresque est incomplète. Placez toutes les lettres.";
+                    resultMessage.className = 'error';
+                } else {
+                    resultMessage.textContent = "Erreur. Certaines lettres sont mal placées ou mal orientées.";
+                    resultMessage.className = 'error';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
