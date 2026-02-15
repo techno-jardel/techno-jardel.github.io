@@ -4,16 +4,39 @@
     <meta charset="UTF-8">
     <title>Poulies Romaines</title>
     <style>
-        body { margin: 0; padding: 0; background-color: transparent; font-family: sans-serif; }
-        #conteneur { text-align: center; width: 100%; }
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background-color: transparent; 
+            font-family: sans-serif; 
+        }
+        #conteneur { 
+            text-align: center; 
+            width: 100%; 
+            margin-top: 15px; /* Espace au-dessus */
+        }
         select {
             background: #e3d5b8; /* Parchemin */
             border: 2px solid #8B4513; /* Bois sombre */
             color: #3e2723;
-            padding: 5px;
             font-weight: bold;
             border-radius: 4px;
             cursor: pointer;
+            
+            /* --- MODIFICATIONS ICI --- */
+            /* Largeur augmentée pour afficher tout le texte */
+            width: 130px; 
+            /* Hauteur fixe pour correspondre à la boîte du canvas */
+            height: 30px;
+            /* Important : inclut les bordures dans le calcul de la largeur/hauteur */
+            box-sizing: border-box; 
+            /* Taille de police légèrement réduite */
+            font-size: 11px;
+            padding: 0 2px;
+        }
+        /* Retire le contour de sélection sur certains navigateurs */
+        select:focus {
+            outline: none;
         }
         canvas { display: block; margin: 0 auto; cursor: pointer; }
     </style>
@@ -24,7 +47,7 @@
         <div id="commande">
             <select id="liste" name="liste">
                 <option value="0">Poulie simple</option>
-                <option value="1">Poulie mobile (a)</option>
+                <option value="1">Poulie mobile</option>
                 <option value="3">Palan 3 brins</option>
                 <option value="4">Palan 4 brins</option>
             </select>
@@ -60,8 +83,8 @@
     var colBoisFonce = "#8B4513"; 
     var colPierre = "#A9A9A9";    
     var colPierreContour = "#696969"; 
-    var colCorde = "#8B4513";     
-    var colMetal = "#2F4F4F";     
+    var colCorde = "#8B4513";      
+    var colMetal = "#2F4F4F";      
     var colParchemin = "#e3d5b8";
 
     // Lancement initial
@@ -158,8 +181,9 @@
     // --- Affichage des éléments ---
 
     function metrix(xori,yori,c,val,unit){
-        // MODIFICATION : Style parchemin au lieu du cadre vert
-        var large=85, haut=30;
+        // --- MODIFICATION JS ICI ---
+        // On passe la largeur de 85 à 130 pour correspondre au CSS
+        var large=130, haut=30; 
         
         // Fond Parchemin
         hh.fillStyle = colParchemin;     
@@ -167,14 +191,15 @@
         
         // Bordure bois
         hh.strokeStyle = colBoisFonce;
-        hh.lineWidth = 2;       
+        hh.lineWidth = 2;        
         hh.strokeRect(xori,yori,large,haut);
         
         // Texte
         var s = "Masse: " + val.toFixed(0) + " " + unit;
-        hh.fillStyle = "#3e2723"; // Encre foncée       
+        hh.fillStyle = "#3e2723"; // Encre foncée        
         hh.font = "bold 13px Arial";
-        hh.fillText(s, xori+8, yori+20);
+        // Légère modification de la position X (+15 au lieu de +8) pour centrer un peu mieux
+        hh.fillText(s, xori+15, yori+20);
         
         // Reset ligne
         hh.lineWidth = 1;
@@ -186,7 +211,7 @@
         hh.lineJoin="round";
         hh.lineWidth=3;
         hh.strokeStyle=colBoisFonce; // Rail en bois
-        drawLine(xcmin,yc1,xcmax,yc1);                    
+        drawLine(xcmin,yc1,xcmax,yc1);                     
         hh.lineWidth=1.8;
         hh.strokeStyle="rgba(255,255,255,0.5)";
         drawLine(xcmin,yc1+1,xcmax,yc1+1);
@@ -206,7 +231,7 @@
         hh.strokeStyle=colBoisFonce;    hh.strokeRect(Xd+xp,Yd+hd,30,150);
         hh.strokeStyle="black"; 
         drawLine(Xd+xp+15,Yd+hd+150,Xd+xp+15,Yd+hd+170);
-        hh.fillStyle=colBoisFonce;           hh.fillRect(Xd+xp-5,Yd+hd+170,40,10);    //socle
+        hh.fillStyle=colBoisFonce;          hh.fillRect(Xd+xp-5,Yd+hd+170,40,10);    //socle
         drawLine(Xd+xp-3,Yd+ld+162,Xd+xp+33,Yd+ld+162);
         hh.strokeStyle="black";
         hh.fillStyle="black";
@@ -266,7 +291,7 @@
         hh.strokeStyle="black"; cercle(Xc,Yc,R,false);
         
         // Point fixe
-        hh.fillStyle=colMetal;              cercle(Xd,Yd,5,true);
+        hh.fillStyle=colMetal;             cercle(Xd,Yd,5,true);
         hh.strokeStyle = colCorde;
         drawLine(Xc,Yc,Xc+x,Yc-y);      drawLine(Xc,Yc,Xc-x,Yc+y);
         drawLine(Xc,Yc,Xc-y,Yc-x);      drawLine(Xc,Yc,Xc+y,Yc+x);
@@ -293,7 +318,7 @@
 
         // Masse Pierre
         hh.fillStyle=colPierre; hh.fillRect(Xd,Yd+L+50,2*R,(M-50)/20);
-        hh.strokeStyle=colPierreContour;    hh.strokeRect(Xd,Yd+L+50,2*R,(M-50)/20);        
+        hh.strokeStyle=colPierreContour;    hh.strokeRect(Xd,Yd+L+50,2*R,(M-50)/20);         
         dynamometre();
     }
 
@@ -341,7 +366,7 @@
         cercle(Xd,Yd+L-36,R1,true);  hh.strokeStyle="black"; cercle(Xd,Yd+L-36,R1,false);
         cercle(Xd,Yd+L+R,R, true);   hh.strokeStyle="black"; cercle(Xd,Yd+L+R,R, false);
 
-        hh.strokeStyle=colBoisFonce;        
+        hh.strokeStyle=colBoisFonce;         
         hh.lineWidth=9;
         drawLine(Xd,Yd+L+R1-65,Xd,Yd+L+38);
         hh.lineWidth=2.5;
@@ -349,7 +374,7 @@
         hh.lineWidth=1.5;
         hh.strokeStyle="black";
         hh.fillStyle=colMetal;
-        cercle(Xd,Yd+L+28,2,true);  cercle(Xd,Yd+L-60+R1,2,true);       
+        cercle(Xd,Yd+L+28,2,true);  cercle(Xd,Yd+L-60+R1,2,true);        
         hh.fillStyle=colPierre;         hh.fillRect(Xd-R,Yd+L+80,2*R,(M-50)/40);
         hh.strokeStyle=colPierreContour; hh.strokeRect(Xd-R,Yd+L+80,2*R,(M-50)/40);
         //cables
@@ -393,7 +418,7 @@
         
         hh.fillStyle=colBoisFonce;
         cercle(Xd,Yd+L+R,R, true); hh.strokeStyle="black"; cercle(Xd,Yd+L+R,R, false);  
-        hh.strokeStyle=colBoisFonce;        
+        hh.strokeStyle=colBoisFonce;         
         hh.lineWidth=9;
         drawLine(Xd,Yd+L+R1-65,Xd,Yd+L+38);
         hh.lineWidth=2.5;
@@ -401,7 +426,7 @@
         hh.lineWidth=1.5;
         hh.strokeStyle="black";
         hh.fillStyle=colMetal;
-        cercle(Xd,Yd+L+28,2,true);  cercle(Xd,Yd+L-60+R1,2,true);       
+        cercle(Xd,Yd+L+28,2,true);  cercle(Xd,Yd+L-60+R1,2,true);        
         hh.fillStyle=colPierre;             hh.fillRect(Xd-R,Yd+L+80,2*R,(M-50)/40);
         hh.strokeStyle=colPierreContour; hh.strokeRect(Xd-R,Yd+L+80,2*R,(M-50)/40);
         hh.strokeStyle=colCorde;
@@ -422,11 +447,12 @@
             case 3: palan3();           break;
             case 4: palan4();           break;
         }
-        if(!drap){    
+        if(!drap){      
             curseur();
             hh.lineWidth="1";
             // Appel modifié sans le code couleur '1' (vert)
-            metrix(200,530,1,M,'g');
+            // On décale légèrement la position X (180 au lieu de 200) pour centrer la nouvelle boîte plus large
+            metrix(180,530,1,M,'g');
         }
         hh.lineWidth="1";
         cadre3D(20,20,300,580);
