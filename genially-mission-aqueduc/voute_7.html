@@ -487,9 +487,9 @@ body {
                 // VICTOIRE !
                 cintreRemoved = true;
                 selectedBlock.style.opacity = '0'; // Disparait
-                statusEl.textContent = "CONSTRUCTION RÉUSSIE ! L'ARC TIENT ! ";
+                statusEl.textContent = "CONSTRUCTION RÉUSSIE ! L'ARCHE TIENT ! ";
                 statusEl.style.color = "#2ecc71";
-                setTimeout(() => alert("Félicitations ! Vous avez construit un arc romain stable."), 200);
+                setTimeout(() => alert("Félicitations ! Vous avez construit une arche stable avec une clé de voute finale !"), 200);
             } else {
                 // Il revient à sa place (magnétisme inverse)
                 setTransform(selectedBlock, cintreTarget.x, cintreTarget.y, cintreTarget.r);
@@ -531,4 +531,5 @@ body {
     initGame();
 </script>
 </body>
+
 </html>
