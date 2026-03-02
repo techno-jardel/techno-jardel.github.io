@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>realite augmentee avec AR.JS</title>
+  <!--  scripts de chez https://aframe.io/-->
+  <script src="aframe.min.js"></script>
+  <script src="aframe-ar.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
+</head>
+<body>
+
+<a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+
+<!-- Marqueur personnalisé -->
+<a-marker type="pattern" url="nemo-pattern.patt">
+
+	<!-- modele 3d -->
+	<a-gltf-model
+          src="cafard.gltf"
+          scale="0.5 0.5 0.5"
+          position="0 0 0"
+          rotation="0 0 0">
+
+          <a-animation
+            attribute="rotation"
+            to="0 360 0"
+            dur="4000"
+            easing="linear"
+            repeat="indefinite">
+	 </a-animation>
+      
+         <a-text 
+        value="TS-BUG" 
+        position="0 1 0" 
+        rotation="0 0 0" 
+        align="center" 
+        color="blue" 
+        width="5">
+        </a-text>
+
+	</a-gltf-model>
+
+
+</a-marker>
+
+<!-- Caméra -->
+<a-entity camera></a-entity>
+</a-scene>
+</body>
+</html>
