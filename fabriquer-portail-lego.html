@@ -101,50 +101,38 @@
 
   <tr>
    <td bgcolor="#FFFFFF"><!-- InstanceBeginEditable name="EditRegion3" -->
-     <p class="h1">Simulations Algodoo : quelques outils</p>
-     <p class="h0">Les documents ci-dessous ont &eacute;t&eacute; test&eacute;s en classe et sont t&eacute;l&eacute;chargeables pour une utilisation p&eacute;dagogique &agrave; but non lucratif. </p>
-     <p class="h0">&nbsp;</p>
-     <table width="100%" border="0" align="center">
-       <tr>
-         <td width="10%" align="left" valign="top">&nbsp;</td>
-         <td width="40%" align="left" valign="top"><p><span class="h0"><img src="algodoo/balance.jpg" alt=""  class="image"></span></p>
-           <p>&nbsp;</p></td>
-         <td width="20%" align="left" valign="top"><span class="h0">Une balance avec des masses</span></td>
-         <td width="20%" align="right" valign="top"><div align="left"><span class="h0">Fichier .phz &agrave; t&eacute;l&eacute;charger<br>
-           <a href="algodoo/balance.phz"><img src="algodoo/icone-phz.jpg" alt="" width="20%"  class="image"></a></span></div></td>
-         <td width="10%" align="right" valign="top">&nbsp;</td>
-       </tr>
-       <tr>
-         <td align="left" valign="top">&nbsp;</td>
-         <td align="left" valign="top"><p><span class="h0"><img src="algodoo/chrono.jpg" alt=""  class="image"></span></p>
-           <p>&nbsp;</p></td>
-         <td align="left" valign="top"><span class="h0">Un chronom&egrave;tre digital</span></td>
-         <td align="right" valign="top"><div align="left"><span class="h0">Fichier .phz &agrave; t&eacute;l&eacute;charger<br>
-           <a href="algodoo/chronometre-4.phz"><img src="algodoo/icone-phz.jpg" alt="" width="20%"  class="image"></a></span></div></td>
-         <td align="right" valign="top">&nbsp;</td>
-       </tr>
-       <tr>
-         <td align="left" valign="top">&nbsp;</td>
-         <td align="left" valign="top"><p><span class="h0"><img src="algodoo/dynamometre.jpg" alt=""  class="image"></span></p>
-           <p>&nbsp;</p></td>
-         <td align="left" valign="top"><span class="h0">Un dynamom&egrave;tre</span></td>
-         <td align="right" valign="top"><div align="left"><span class="h0">Fichier .phz &agrave; t&eacute;l&eacute;charger<br>
-           <a href="algodoo/dynamometre.phz"><img src="algodoo/icone-phz.jpg" alt="" width="20%"  class="image"></a></span></div></td>
-         <td align="right" valign="top">&nbsp;</td>
-       </tr>
-       <tr>
-         <td align="left" valign="top">&nbsp;</td>
-         <td align="left" valign="top"><span class="h0"><img src="algodoo/piedacoulisse.jpg" alt=""  class="image"></span></td>
-         <td align="left" valign="top"><span class="h0">Un calibre &agrave; coulisse</span></td>
-         <td align="right" valign="top"><div align="left"><span class="h0">Fichier .phz &agrave; t&eacute;l&eacute;charger<br>
-           <a href="algodoo/piedacoulisse-6.phz"><img src="algodoo/icone-phz.jpg" alt="" width="20%"  class="image"></a></span></div></td>
-         <td align="right" valign="top">&nbsp;</td>
-       </tr>
-     </table>
-     <p>&nbsp;</p>
-     <p></p>
 
-      <blockquote>
+      <blockquote class="h1">
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>Le portail LEGO </p>
+        <p>1. La maquette </p>
+        <p>Le portail motoris&eacute; command&eacute; par bouton poussoir. Un train d&rsquo;engrenage ralenti la vitesse de rotation et donne du couple. Les but&eacute;es fin de course arr&ecirc;tent le moteur automatiquement, il manque encore un gyrophare et un d&eacute;tecteur de pr&eacute;sence. La cha&icirc;ne d&rsquo;&eacute;nergie fonctionne avec une forte puissance &eacute;lectrique sous 9V,  La partie commande (microcontr&ocirc;leur) fonctionne avec seulement 3V. </p>
+        <p><a href="fabriquer-portail-lego/portail-lego-microbit.png" target="_blank"><img src="fabriquer-portail-lego/portail-lego-microbit-600.png" width="600" height="439"></a></p>
+        <p>2. La cha&icirc;ne d&rsquo;information et cha&icirc;ne d&rsquo;&eacute;nergie </p>
+        <p><a href="fabriquer-portail-lego/chainedenergiechainedinformation.png" target="_blank"><img src="fabriquer-portail-lego/chainedenergiechainedinformation-600.png" width="600" height="422"></a></p>
+        <p>3. La programmation </p>
+        <p>microbit-Lego-5.hex </p>
+        <p>Programme makecode&nbsp;: g&egrave;re un moteur pilot&eacute; avec des relais pont en H :  </p>
+        <p>-bouton A = le moteur avance = mettre P8 &agrave; 1 et P14 &agrave; 0,  <br>
+        -bouton B = le moteur recule = mettre P8 &agrave; 0 et P14 &agrave; 1,<br>
+        -logo microbit = le moteur s&rsquo;arr&ecirc;te = mettre P8 &agrave; 0 et P14 &agrave; 0,  <br>
+        -contact fin de course sur P1 ou P2 = le moteur s&rsquo;arr&ecirc;te.  </p>
+        <p>Le microbit est lent, ne pas utiliser de boucle &laquo;&nbsp;forever&nbsp;&raquo;,  il faut utiliser une boucle &laquo;&nbsp;tant que vrai&nbsp;&raquo; et mettre tout le programme dedans. </p>
+        <p>Le programme doit &ecirc;tre r&eacute;actif, sans d&eacute;lais, lorsqu&rsquo;on appuie sur un bouton. <br>
+          <br>
+        &#55357;&#56589; &Agrave; quoi sert le bloc &laquo;&nbsp;continue&nbsp;&raquo; dans une boucle 
+        ?<br>
+Le bloc &laquo;&nbsp;continue&nbsp;&raquo; signifie : &laquo; Arr&ecirc;te imm&eacute;diatement l&rsquo;it&eacute;ration en cours et recommence la boucle depuis le d&eacute;but. &raquo; Autrement dit, tout ce qui vient apr&egrave;s &laquo;&nbsp;continue&nbsp;&raquo; dans la boucle est ignor&eacute;, la boucle repart directement au d&eacute;but, cela permet de donner la priorit&eacute; &agrave; certaines actions. Dans notre code, on veut que certaines actions soient prioritaires : -arr&ecirc;t d&rsquo;urgence -arr&ecirc;t fin de course -commande avance -commande recule Quand l&rsquo;une de ces conditions est vraie, on veut ex&eacute;cuter l&rsquo;action imm&eacute;diatement, ne pas tester les autres conditions et recommencer la boucle au plus vite. </p>
+        <p><a href="fabriquer-portail-lego/programmation-microbit.png" target="_blank"><img src="fabriquer-portail-lego/programmation-microbit-600.png" width="600" height="439"></a></p>
+        <p>4. Les composants de la partie commande. </p>
+        <p>- Module Relais Grove Seeedstudio SeeedStudio 103020132 Carte relais SPDT, SRD-05VDC-SL-C <br>
+        - 2x Interrupteur fin de course &agrave; lame R&eacute;f&eacute;rence : 102020143  <br>
+        - Carte d'interface BitMaker V2  Microcontr&ocirc;leur micro:bit <br>
+        - Bloc d&rsquo;alimentation micro-USB avec interrupteur 	</p>
+        <p>&nbsp;</p>
+        <p></p>
+        <p><a href="fabriquer-portail-lego/montage-electrique.png" target="_blank"><img src="fabriquer-portail-lego/montage-electrique-600.png" width="600" height="608"></a></p>
         <p>&nbsp;</p>
         <p>&nbsp;</p>
         <p>&nbsp;</p>
@@ -152,10 +140,7 @@
         <p>&nbsp;</p>
         <p>&nbsp;</p>
         <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        </blockquote>
+      </blockquote>
 
    <!-- InstanceEndEditable --></td>
   </tr>
