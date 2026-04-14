@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Exercice Tableur – Aqueduc</title>
+
+<style>
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    padding: 20px;
+    background: #fafafa;
+  }
+
+  table {
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  }
+
+  th, td {
+    border: 1px solid #d0d7de;
+    padding: 4px;
+    min-width: 120px;
+    position: relative;
+  }
+
+  /* Colonne D élargie */
+  #sheet td:nth-child(5),
+  #sheet th:nth-child(5) {
+    min-width: 150px;
+  }
+
+  th {
+    background: #f3f4f6;
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .rownum {
+    background: #f3f4f6;
+    width: 40px;
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .gridcell {
+    background: white;
+  }
+
+  .gridcell:hover {
+    background: #f0f8ff;
+  }
+
+  tr:nth-child(even) td:not(.rownum):not(th) {
+    background: #fafafa;
+  }
+
+  input.cell {
+    width: 100%;
+    box-sizing: border-box; /* Empêche le débordement */
+    border: none;
+    padding: 4px;
+    font-size: 14px;
+    background: white;
+    color: #222;
+  }
+
+  input.cell:focus {
+    outline: 2px solid #4a90e2;
+    background: #e8f2ff;
+  }
+
+  input[readonly] {
+    background: #f7f7f7;
+    color: #666;
+  }
+
+  #addrBar, #contentBar {
+    width: 150px;
+    padding: 6px;
+    margin-right: 8px;
+    border: 1px solid #d0d7de;
+    background: #fff;
+    border-radius: 3px;
+  }
+
+  #contentBar {
+    width: 400px;
+  }
+
+  .fill-handle {
+    width: 8px;
+    height: 8px;
+    background: #1a73e8;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: crosshair;
+    border-radius: 1px;
+  }
+</style>
+</head>
+
+<body>
+
+<h2>Exercice de tableur : Aqueduc romain</h2>
+
+<p>Barre des formules :</p>
+<input id="addrBar" readonly placeholder="Adresse">
+<input id="contentBar" readonly placeholder="Contenu (valeur ou formule)">
+
+<br><br>
+
+<table id="sheet">
+  <tr>
+    <th></th>
+    <th>A</th><th>B</th><th>C</th><th>D</th>
+  </tr>
+
+  <!-- Ligne 1 : intitulés -->
+  <tr>
+    <td class="rownum">1</td>
+    <td id="A1" class="gridcell">Postes budgétaires – détails</td>
+    <td id="B1" class="gridcell">M€ / km</td>
+    <td id="C1" class="gridcell">km</td>
+    <td id="D1" class="gridcell">TOTAL</td>
+  </tr>
+
+  <tr>
+    <td class="rownum">2</td>
+    <td id="A2" class="gridcell">Arpenteurs, chorobates, architectes</td>
+    <td id="B2" class="gridcell">-</td>
+    <td id="C2" class="gridcell">-</td>
+    <td><input class="cell" id="D2" value="25.00" readonly></td>
+  </tr>
+
+  <tr>
+    <td class="rownum">3</td>
+    <td id="A3" class="gridcell">Achat des terres aux patriciens</td>
+    <td id="B3" class="gridcell">-</td>
+    <td id="C3" class="gridcell">-</td>
+    <td><input class="cell" id="D3" value="35.00" readonly></td>
+  </tr>
+
+  <tr>
+    <td class="rownum">4</td>
+    <td id="A4" class="gridcell">Base de vie, Chars à bœufs, nourriture, transport des blocs</td>
+    <td id="B4" class="gridcell">-</td>
+    <td id="C4" class="gridcell">-</td>
+    <td><input class="cell" id="D4" value="65.00" readonly></td>
+  </tr>
+
+  <tr>
+    <td class="rownum">5</td>
+    <td id="A5" class="gridcell">Renforcement des sols argileux, intempéries.</td>
+    <td id="B5" class="gridcell">-</td>
+    <td id="C5" class="gridcell">-</td>
+    <td><input class="cell" id="D5" value="35.00" readonly></td>
+  </tr>
+
+  <tr>
+    <td class="rownum">6</td>
+    <td id="A6" class="gridcell">Matériaux : Pierre, chaux, pouzzolane, bois</td>
+    <td id="B6" class="gridcell">2.25</td>
+    <td id="C6" class="gridcell">45</td>
+    <td><input class="cell formula" id="D6"></td>
+  </tr>
+
+  <tr>
+    <td class="rownum">7</td>
+    <td id="A7" class="gridcell">Main-d'œuvre : Légionnaires, maçons, artisans</td>
+    <td id="B7" class="gridcell">2.25</td>
+    <td id="C7" class="gridcell">45</td>
+    <td><input class="cell formula" id="D7"></td>
+  </tr>
+
+  <tr>
+    <td class="rownum">8</td>
+    <td id="A8" class="gridcell">Matériaux : Pierre, chaux, pouzzolane, bois</td>
+    <td id="B8" class="gridcell">9</td>
+    <td id="C8" class="gridcell">4.5</td>
+    <td><input class="cell formula" id="D8"></td>
+  </tr>
+
+  <tr>
+    <td class="rownum">9</td>
+    <td id="A9" class="gridcell">Main-d'œuvre : Légionnaires, maçons, artisans</td>
+    <td id="B9" class="gridcell">9</td>
+    <td id="C9" class="gridcell">4.5</td>
+    <td><input class="cell formula" id="D9"></td>
+  </tr>
+
+  <tr>
+    <td class="rownum">10</td>
+    <td id="A10" class="gridcell">Matériaux : Pierre, chaux, pouzzolane, bois</td>
+    <td id="B10" class="gridcell">75</td>
+    <td id="C10" class="gridcell">0.5</td>
+    <td><input class="cell formula" id="D10"></td>
+  </tr>
+
+  <tr>
+    <td class="rownum">11</td>
+    <td id="A11" class="gridcell">Main-d'œuvre : Légionnaires, maçons, artisans</td>
+    <td id="B11" class="gridcell">75</td>
+    <td id="C11" class="gridcell">0.5</td>
+    <td><input class="cell formula" id="D11"></td>
+  </tr>
+
+  <tr>
+    <td class="rownum">12</td>
+    <td id="A12" class="gridcell"><b>TOTAL Aqueduc fonctionnel de 50 km</b></td>
+    <td id="B12" class="gridcell"></td>
+    <td id="C12" class="gridcell"></td>
+    <td><input class="cell formula" id="D12"></td>
+  </tr>
+</table>
+
+<script>
+/* --- Ton script original, inchangé --- */
+
+let activeInput = null;
+let dragging = false;
+let dragStartInput = null;
+
+function colLetterFromIndex(colIndex) {
+  return String.fromCharCode(64 + colIndex);
+}
+
+function getAddressFromInput(input) {
+  const td = input.parentNode;
+  const tr = td.parentNode;
+  const row = tr.rowIndex;
+  const col = td.cellIndex;
+  const colLetter = colLetterFromIndex(col);
+  return colLetter + row;
+}
+
+function getCellNumericValue(addr) {
+  const el = document.getElementById(addr);
+  if (!el) return 0;
+
+  if (el.tagName === "INPUT") {
+    const v = parseFloat(el.value.replace(",", "."));
+    return isNaN(v) ? 0 : v;
+  }
+
+  const v = parseFloat(el.textContent.replace(",", "."));
+  return isNaN(v) ? 0 : v;
+}
+
+function expandSomme(expr) {
+  return expr.replace(/SOMME\(([A-D]\d+):([A-D]\d+)\)/gi, (m, a1, a2) => {
+    const col = a1[0];
+    const r1 = parseInt(a1.slice(1), 10);
+    const r2 = parseInt(a2.slice(1), 10);
+    const parts = [];
+    for (let r = r1; r <= r2; r++) parts.push(col + r);
+    return "(" + parts.join("+") + ")";
+  });
+}
+
+function evaluateFormula(formula) {
+  let expr = formula.replace(/^=/, "").trim();
+  expr = expandSomme(expr);
+
+  expr = expr.replace(/([A-D][1-9]\d?)/g, m => String(getCellNumericValue(m)));
+
+  try {
+    const res = Function('"use strict";return (' + expr + ')')();
+    return (typeof res === "number" && !isNaN(res)) ? res : NaN;
+  } catch {
+    return NaN;
+  }
+}
+
+function recalcAll() {
+  document.querySelectorAll("input.cell").forEach(inp => {
+    if (inp.dataset.formula) {
+      const val = evaluateFormula(inp.dataset.formula);
+      inp.value = isNaN(val) ? "#ERR" : String(val);
+    }
+  });
+}
+
+function updateFormulaBarFromInput(input) {
+  if (!input) return;
+  const addr = getAddressFromInput(input);
+  const content = input.dataset.formula || input.value;
+  document.getElementById("addrBar").value = addr;
+  document.getElementById("contentBar").value = content;
+}
+
+document.querySelectorAll("input.cell").forEach(input => {
+  input.addEventListener("focus", () => {
+    activeInput = input;
+    if (input.dataset.formula) input.value = input.dataset.formula;
+    updateFormulaBarFromInput(input);
+
+    document.querySelectorAll(".fill-handle").forEach(h => h.remove());
+    if (input.classList.contains("formula")) {
+      const handle = document.createElement("div");
+      handle.className = "fill-handle";
+      input.parentNode.appendChild(handle);
+      handle.addEventListener("mousedown", () => {
+        dragging = true;
+        dragStartInput = input;
+      });
+    }
+  });
+
+  input.addEventListener("blur", () => {
+    if (input.dataset.formula) {
+      const val = evaluateFormula(inp.dataset.formula);
+      input.value = isNaN(val) ? "#ERR" : String(val);
+    }
+    recalcAll();
+    updateFormulaBarFromInput(input);
+  });
+
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const txt = input.value.trim();
+      if (txt.startsWith("=")) input.dataset.formula = txt;
+      else delete input.dataset.formula;
+
+      const val = txt.startsWith("=")
+        ? evaluateFormula(txt)
+        : parseFloat(txt.replace(",", "."));
+
+      if (txt.startsWith("=")) input.value = isNaN(val) ? "#ERR" : String(val);
+
+      recalcAll();
+      updateFormulaBarFromInput(input);
+      input.blur();
+    }
+  });
+});
+
+document.querySelectorAll(".gridcell").forEach(td => {
+  td.addEventListener("click", () => {
+    document.getElementById("addrBar").value = td.id;
+    document.getElementById("contentBar").value = td.textContent;
+    activeInput = null;
+  });
+});
+
+document.addEventListener("mouseup", () => dragging = false);
+
+document.addEventListener("mousemove", e => {
+  if (!dragging || !dragStartInput || !dragStartInput.dataset.formula) return;
+
+  const target = document.elementFromPoint(e.clientX, e.clientY);
+  if (!target) return;
+
+  const inp = target.tagName === "INPUT"
+    ? target
+    : (target.querySelector && target.querySelector("input.cell"));
+
+  if (!inp || !inp.classList.contains("formula")) return;
+
+  const startRow = dragStartInput.parentNode.parentNode.rowIndex;
+  const endRow = inp.parentNode.parentNode.rowIndex;
+
+  if (endRow <= startRow) return;
+
+  const baseFormula = dragStartInput.dataset.formula;
+
+  for (let r = startRow + 1; r <= endRow; r++) {
+    const newFormula = baseFormula.replace(/([A-D])\d+/g, (m, col) => col + r);
+    const cell = document.getElementById("D" + r);
+    if (cell) cell.dataset.formula = newFormula;
+  }
+
+  recalcAll();
+});
+</script>
+
+</body>
+</html>
