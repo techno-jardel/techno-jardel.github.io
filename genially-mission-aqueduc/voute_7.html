@@ -487,10 +487,9 @@ body {
                 // VICTOIRE !
                 cintreRemoved = true;
                 selectedBlock.style.opacity = '0'; // Disparait
-                statusEl.textContent = "CONSTRUCTION RÉUSSIE ! L'ARC TIENT ! ";
+                statusEl.textContent = "CONSTRUCTION RÉUSSIE ! Vous avez gagné un indice : la Clé de voute";
                 statusEl.style.color = "#2ecc71";
-                setTimeout(() => alert("Félicitations ! La pièce finale est la... clé de voûte"), 200);
-            } else {
+              } else {
                 // Il revient à sa place (magnétisme inverse)
                 setTransform(selectedBlock, cintreTarget.x, cintreTarget.y, cintreTarget.r);
             }
