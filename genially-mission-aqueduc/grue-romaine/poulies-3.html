@@ -145,7 +145,9 @@
         var x = Math.round(evt.clientX - cRect.left);
         var y = Math.round(evt.clientY - cRect.top); 
         Xs=x-3;   Ys=y-3;
-        if ((Xs>xc1-4)&&(Xs<xc1+4)&&(Ys>yc1-4)&&(Ys<yc1+4)) test=true;
+        
+        // Zone de clic élargie à 15 pixels
+        if ((Xs>xc1-15)&&(Xs<xc1+15)&&(Ys>yc1-15)&&(Ys<yc1+15)) test=true;
         trace();
     });
 
@@ -160,8 +162,8 @@
         var y = Math.round(evt.clientY - cRect.top); 
         Xs=x-3;   Ys=y-3;
         
-        // Curseur main si on survole le bouton
-        if((Xs>xc1-4)&&(Xs<xc1+4)&&(Ys>yc1-4)&&(Ys<yc1+4)) document.body.style.cursor='pointer';
+        // Curseur main si on survole le bouton avec la zone élargie à 15 pixels
+        if((Xs>xc1-15)&&(Xs<xc1+15)&&(Ys>yc1-15)&&(Ys<yc1+15)) document.body.style.cursor='pointer';
         else document.body.style.cursor='auto';
         
         if ((test)&&(!drap)){
@@ -457,6 +459,6 @@
         hh.lineWidth="1";
         cadre3D(20,20,300,580);
     }
-</script>           
+</script>            
 </body>
 </html>
