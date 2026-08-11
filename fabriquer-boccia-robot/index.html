@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TM Audio vers Micro:bit</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.4.0/dist/speech-commands.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>Contrôle Micro:bit par la Voix</h1>
+
+    <div class="section">
+        <h3>1. Modèle Teachable Machine</h3>
+        <input type="text" id="model-url" placeholder="URL du modèle (ex: https://...)" value="">
+        <button id="btn-load" onclick="loadModel()">Charger le modèle</button>
+        <div id="model-status" class="status">Modèle non chargé.</div>
+    </div>
+
+    <div class="section">
+        <h3>2. Écoute du Microphone</h3>
+        <button id="btn-listen" onclick="startListening()" disabled>Activer le Micro et Écouter</button>
+        <div id="mic-status" class="status">Microphone inactif.</div>
+    </div>
+
+    <div class="section">
+        <h3>3. Connexion Micro:bit (USB)</h3>
+        <button id="btn-usb" onclick="connectUSB()">Connecter la Micro:bit</button>
+        <div id="usb-status" class="status">Non connecté.</div>
+    </div>
+
+    <div class="section">
+        <h3>Reconnaissance en direct</h3>
+        <div id="label-container"></div>
+    </div>
+
+    <div class="section">
+        <h3>Dernière donnée envoyée (USB)</h3>
+        <div id="usb-log" class="usb-log">En attente...</div>
+    </div>
+</div>
+
+</body>
+</html>
