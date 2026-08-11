@@ -1,0 +1,190 @@
+<html><!-- InstanceBegin template="/Templates/2024-template.dwt" codeOutsideHTMLIsLocked="false" --><br>
+
+<head>
+
+<title>Techno.Jardel - Technologie</title>
+
+<link rel="icon" href="logo-techno-3.ico" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<meta charset="utf8">
+	<meta name="description" content="Technologie collège">
+ 	<meta name="keywords" content="technologie, college, enseignement, programmer, modeliser, fabriquer, numeriser">
+	<meta name="author" content="Bruno Jardel - techno.jardel">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    
+<link href="Templates/2024-stylized.css" rel="stylesheet" type="text/css" />
+<link href="Templates/2024-menu.css" rel="stylesheet" type="text/css"  />
+
+</head>
+
+
+
+
+<body bgcolor="#FFFFFF">
+
+<table width="80%" height="100%" border="0" align="center" cellspacing="0">
+
+  <tr bgcolor="#6F8B99" height="10px">
+    <td><img src="bandeau-technologie-3.jpg" height="" class="image"> <br></td>
+  </tr>
+
+
+  <tr  height="10px">
+<td>
+<label for="show-menu" class="show-menu">Show Menu</label>
+<input type="checkbox" id="show-menu" role="button">
+<ul id="menu">
+
+<li><a href="index.html">Accueil</a></li>
+
+<li><a href="#">Modeliser &#65516;</a>
+<ul class="hidden">
+<li><a href="modeliser-solidworks.html">Modeles-SolidWorks</a></li>
+<li><a href="modeliser-sketchup.html">Modeles-SketchUP</a></li>
+<li><a href="algodoo-materiaux.html">Algodoo-materiaux</a></li>
+<li><a href="algodoo-fonctionnement.html">Algodoo-fonctionnement</a></li>
+<li><a href="algodoo-outils.html">Algodoo-outils</a></li>
+</ul>
+</li>
+
+<li><a href="#">Numeriser &#65516;</a>
+<ul class="hidden">
+<li><a href="numeriser-son.html">Le son</a></li>
+<li><a href="numeriser-dessin.html">Le dessin</a></li>
+<li><a href="numeriser-photo.html">La photo</a></li>
+</ul>
+</li>
+
+<li><a href="#">Fabriquer &#65516;</a>
+<ul class="hidden">
+<li><a href="fabriquer-ts-bug.html">TS-Bug</a></li>
+<li><a href="fabriquer-pont.html">Pont en papier</a></li>
+<li><a href="fabriquer-velo-conn.html">Velo connecte</a></li>
+<li><a href="fabriquer-simulateur-sis.html">Simulateur sismique</a></li>
+<li><a href="fabriquer-cle-usb.html">Cle USB design</a></li>
+<li><a href="untoitpournotredame.html">EPI Notre-Dame</a></li>
+<li><a href="fabriquer-hologram.html">Hologramme</a></li>
+<li><a href="fabriquer-portail-lego.html">Portail LEGO</a></li>
+<li><a href="fabriquer-boccia-robot.html">BOCCIA robot</a></li><br>
+</ul>
+</li>
+
+
+<li><a href="#">Programmer &#65516;</a>
+<ul class="hidden">
+<li><a href="programmer-robotprog.html">RoboPROG</a></li>
+<li><a href="programmer-scratch.html">Scratch</a></li>
+<li><a href="programmer-mblock.html">mBlock</a></li>
+<li><a href="programmer-mitappinventor.html">MIT App Inventor</a></li>
+<li><a href="programmer-lampesolaire.html">Lampe Solaire</a></li>
+</ul>
+</li>
+
+<li><a href="jeux-serieux.html">Jeux serieux</a></li>
+<li><a href="wordpress.html">WordPress</a></li>
+<li><a href="contact.html">Contact</a></li>
+
+
+
+
+
+
+
+</ul>
+</blockquote>
+</td>
+  </tr>
+  
+ <tr  height="100px" bgcolor="#FFFFFF">
+	<td> </td>
+ </tr>
+
+
+
+  <tr>
+   <td bgcolor="#FFFFFF"><!-- InstanceBeginEditable name="EditRegion3" -->
+     <blockquote>
+        <p class="h1">La lampe solaire de jardin</p>
+        <p class="h1"><img src="programmer-lampesolaire/lampe-solaire-eclate-400.png" width="200"></p>
+        <p class="h1">A. L&rsquo;objet programmable &eacute;tudi&eacute;</p>
+        <p>        <span class="h0">Partons d&rsquo;exemple concret&nbsp;: une lampe solaire de jardin programm&eacute;e&nbsp;: elle doit g&eacute;rer l&rsquo;&eacute;nergie de sa batterie et l&rsquo;&eacute;clairage de mani&egrave;re efficace, son micro-contr&ocirc;leur va utiliser les entr&eacute;es/sorties suivantes&nbsp;:
+          </span>
+        </p>
+        <p><img src="programmer-lampesolaire/lampe-solaire-microcontroleur-400.png" width="400"></p>
+        <span class="h1">B.  Le sch&eacute;ma de principe</span>
+        <p> <span class="h0">1. Alimenter. <br>
+        Une cellule solaire 16V alimente un condensateur 9V. Une carte microbit permet de g&eacute;rer le circuit. N8 sortie num&eacute;rique pour commander le  transistor T1&nbsp;: il commute T3 et donc la batterie sur la cellule solaire.  A0 entr&eacute;e analogique pour r&eacute;cup&eacute;rer la valeur de la tension du condensateur par l&rsquo;interm&eacute;diaire d&rsquo;un pont diviseur.</span></p>
+        <p class="h0">2. D&eacute;tecter la luminosit&eacute;.  <br>
+        Une LDR voit sa r&eacute;sistance diminuer lorsque la lumi&egrave;re augmente, or nous pr&eacute;f&eacute;rons la logique inverse, on va donc mesurer la tension du r&eacute;sistor en s&eacute;rie, et envoyer &ccedil;a sur A1.</p>
+        <p class="h0"> 3. Commuter la lampe.<br>
+N5 sortie num&eacute;rique pour commander le  transistor T2&nbsp;: il commute la lampe sur la batterie.</p>
+        <p class="h0"> 4. Indiquer le niveau de charge.<br>
+N13-14-15-16  sortie num&eacute;rique pour commander respectivement les DEL 1-2-3-4 qui indiquent le niveau de charge de la batterie.</p>
+        <p><img src="programmer-lampesolaire/lampe-solaire-schemadeprincipe-800.png" width="800" height="566"></p>
+        <p class="h1">C. Simulation &eacute;lectronique avec TinkerCAD</p>
+        <p><a href="https://www.tinkercad.com/joinclass/AG6JN4TUB">https://www.tinkercad.com/joinclass/AG6JN4TUB</a></p>
+        <p> <span class="h0">Inscrit toi avec un nom d&rsquo;&eacute;tudiant&nbsp;: eleve01 / eleve02 / eleve03 / &hellip; Acc&eacute;der &agrave; ma classe Classes / 2nde SNT / Lampe Solaire de Jardin 3 / Copier et &eacute;diter /        Manipulez le mod&egrave;le et r&eacute;pondez aux questions&nbsp;:        </span></p>
+        <p class="h0"><span class="h0">Q1.- D&eacute;marrez la simulation, mettez la LDR sur lumi&egrave;re max&nbsp;: que se passe-t-il avec la batterie&nbsp;? Que font les Dels D1-D2-D3-D4&nbsp;? <br>
+        Q2.- Un nuage passe, la cellule solaire ne voit plus de lumi&egrave;re, quelle est la cons&eacute;quence sur le syst&egrave;me&nbsp;? <br>
+        Q3&nbsp;- Apr&egrave;s avoir charg&eacute; la batterie le syst&egrave;me s&rsquo;arr&ecirc;te automatiquement, quelle est la tension sur la batterie ? <br>
+        Q4.- Rep&eacute;rez dans le programme la ligne o&ugrave; on veille &agrave; ce que U_BATT reste inf&eacute;rieur &agrave; U_max. <br>
+        Q5.- Rep&eacute;rez dans le programme la ligne o&ugrave; on d&eacute;clare la constante U_max, et mettez une valeur qui d&eacute;passe la capacit&eacute; de cette batterie, que se passe -t-il&nbsp;? (lorsque vous avez vu, pensez &agrave; remettre la valeur U_max d&rsquo;origine) <br>
+        Q6.- En fonctionnement normal, la batterie se charge le jour, puis la nuit vient, mettez les capteurs de lumi&egrave;re au mini. Si le PIR d&eacute;tecte un mouvement, que se passe-t-il&nbsp;?  <br>
+        Q7.- La lampe s&rsquo;&eacute;teint au bout de quel d&eacute;lai&nbsp;? Peut-on faire de nombreux cyles d&rsquo;&eacute;clairage&nbsp;?<br>
+        Q8.- Rep&eacute;rez dans le programme la ligne ou on d&eacute;clare cette valeur de d&eacute;lai. Renommez cette variable en Duree_Secondes et mettez une valeur de 8<br>
+        Q9.- La Batterie se d&eacute;charge vite avec une lampe &agrave; incandescence, remplacez-la par une Diode Blanche. Quelle(s) diff&eacute;rence(s)&nbsp;pouvez-vous observer </span>?</p>
+        <p><img src="programmer-lampesolaire/lampe-solaire-tinkercad-800.png" width="800" height="552"></p>
+        <span class="h1">D. Programmation</span>
+        <p> <span class="h0">LUM est la variable num&eacute;rique li&eacute;e &agrave; la luminosit&eacute; ambiante (c&rsquo;est la valeur qui rentre en P1) Or, le microcontr&ocirc;leur Micro:bit poss&egrave;de un convertisseur analogique-num&eacute;rique (CAN) de 10 bits et on sait que 2^10 = 1023. </span></p>
+        <p class="h0">Le CAN traduit une tension physique en un nombre entier sur une certaine plage d&rsquo;utilisation et 3.3 Volt (le maximum) correspond &agrave; 1023 (le maximum)</p>
+        <table width="200" border="0">
+          <tr>
+            <td class="h0">bits </td>
+            <td class="h0">Volts </td>
+          </tr>
+          <tr>
+            <td class="h0">1023 </td>
+            <td class="h0">3.3 </td>
+          </tr>
+          <tr>
+            <td class="h0">P1 </td>
+            <td class="h0">LUM =&nbsp;? </td>
+          </tr>
+        </table>
+        <p class="h0"> Produit en croix&nbsp;:<br>
+        LUM =&nbsp;P1 * 3.3 / 1023  =  ( P1 / 1023 ) * 3.3</p>
+        <p>&nbsp;</p>
+        <p class="h0"> De la m&ecirc;me mani&egrave;re U_BATT est la variable num&eacute;rique li&eacute;e &agrave; la tension du condensateur sur un pont diviseur (valeur qui rentre sur P0 )  Le produit en croix nous donne&nbsp;        :<br>
+U_BATT = (P0 / 1023) * 3.3 *5.7</p>
+        <p class="h0">&nbsp;</p>
+        <p class="h0">&nbsp;</p>
+        <p><img src="programmer-lampesolaire/1.png" width="800" height="359"></p>
+        <p><img src="programmer-lampesolaire/2.png" width="800" height="383"></p>
+        <p><img src="programmer-lampesolaire/3.png" width="800" height="368"></p>
+        <p><img src="programmer-lampesolaire/4.png" width="800" height="743"></p>
+        <p>&nbsp;</p>
+        <p class="h0">Pour aller plus loin&nbsp;: l&rsquo;instruction &laquo;&nbsp; Attendre Duree_Minute secondes&nbsp;&raquo; n&rsquo;est pas concid&eacute;r&eacute;e comme une bonne pratique en programmation. Elle bloque le syst&egrave;me alors que des &eacute;v&eacute;nements ext&eacute;rieurs pourraient advenir. En effet, si une 2eme personne vient alors que la lampe a d&eacute;j&agrave; commenc&eacute; son cycle d&rsquo;&eacute;clairage alors elle ne sera pas d&eacute;tect&eacute;e. La minuterie coupera la lumi&egrave;re comme si la 2eme personne n&rsquo;&eacute;tait pas l&agrave;.  Solution&nbsp;: Il faut utiliser un chronom&egrave;tre asynchrone r&eacute;armable&hellip; relevez le d&eacute;fi et installez cette fonction dans la lampe de jardin. </p>
+        <p>&nbsp;</p>
+        <p><img src="programmer-lampesolaire/lampe-solaire-makecode-800.png" width="800" height="483"></p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p></p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+      </blockquote>
+
+   <!-- InstanceEndEditable --></td>
+  </tr>
+
+
+<tr height="40px">
+   <td bgcolor="#6F8B99">
+        <p> <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="new"><img src="programmer-lampesolaire/Templates/Creative-Commons-cc-by-nc-nd.jpg" width="200" height="30"></a></p>        
+   </td>
+  </tr><br>
+
+</table><br>
+
+</body>	
+
+<!-- InstanceEnd --></html>
