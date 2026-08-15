@@ -1,0 +1,274 @@
+<html><!-- InstanceBegin template="/Templates/2024-template.dwt" codeOutsideHTMLIsLocked="false" --><br>
+
+<head>
+
+<title>Techno.Jardel - Technologie</title>
+
+<link rel="icon" href="logo-techno-3.ico" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<meta charset="utf8">
+	<meta name="description" content="Technologie collège">
+ 	<meta name="keywords" content="technologie, college, enseignement, programmer, modeliser, fabriquer, numeriser">
+	<meta name="author" content="Bruno Jardel - techno.jardel">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    
+<link href="Templates/2024-stylized.css" rel="stylesheet" type="text/css" />
+<link href="Templates/2024-menu.css" rel="stylesheet" type="text/css"  />
+
+</head>
+
+
+
+
+<body bgcolor="#FFFFFF">
+
+<table width="80%" height="100%" border="0" align="center" cellspacing="0">
+
+  <tr bgcolor="#6F8B99" height="10px">
+    <td><img src="bandeau-technologie-3.jpg" height="" class="image"> <br></td>
+  </tr>
+
+
+  <tr  height="10px">
+<td>
+<label for="show-menu" class="show-menu">Show Menu</label>
+<input type="checkbox" id="show-menu" role="button">
+<ul id="menu">
+
+<li><a href="index.html">Accueil</a></li>
+
+<li><a href="#">Modeliser &#65516;</a>
+<ul class="hidden">
+<li><a href="modeliser-solidworks.html">Modeles-SolidWorks</a></li>
+<li><a href="modeliser-sketchup.html">Modeles-SketchUP</a></li>
+<li><a href="algodoo-materiaux.html">Algodoo-materiaux</a></li>
+<li><a href="algodoo-fonctionnement.html">Algodoo-fonctionnement</a></li>
+<li><a href="algodoo-outils.html">Algodoo-outils</a></li>
+</ul>
+</li>
+
+<li><a href="#">Numeriser &#65516;</a>
+<ul class="hidden">
+<li><a href="numeriser-son.html">Le son</a></li>
+<li><a href="numeriser-dessin.html">Le dessin</a></li>
+<li><a href="numeriser-photo.html">La photo</a></li>
+</ul>
+</li>
+
+<li><a href="#">Fabriquer &#65516;</a>
+<ul class="hidden">
+<li><a href="fabriquer-ts-bug.html">TS-Bug</a></li>
+<li><a href="fabriquer-pont.html">Pont en papier</a></li>
+<li><a href="fabriquer-velo-conn.html">Velo connecte</a></li>
+<li><a href="fabriquer-simulateur-sis.html">Simulateur sismique</a></li>
+<li><a href="fabriquer-cle-usb.html">Cle USB design</a></li>
+<li><a href="untoitpournotredame.html">EPI Notre-Dame</a></li>
+<li><a href="fabriquer-hologram.html">Hologramme</a></li>
+<li><a href="fabriquer-portail-lego.html">Portail LEGO</a></li>
+<li><a href="fabriquer-boccia-robot.html">BOCCIA robot</a></li><br>
+</ul>
+</li>
+
+
+<li><a href="#">Programmer &#65516;</a>
+<ul class="hidden">
+<li><a href="programmer-robotprog.html">RoboPROG</a></li>
+<li><a href="programmer-scratch.html">Scratch</a></li>
+<li><a href="programmer-rpm.html">Mesurer une RPM</a></li>
+<li><a href="programmer-lampesolaire.html">Lampe Solaire</a></li>
+</ul>
+</li>
+
+<li><a href="jeux-serieux.html">Jeux serieux</a></li>
+<li><a href="wordpress.html">WordPress</a></li>
+<li><a href="contact.html">Contact</a></li>
+
+
+
+
+
+
+
+</ul>
+</blockquote>
+</td>
+  </tr>
+  
+ <tr  height="100px" bgcolor="#FFFFFF">
+	<td> </td>
+ </tr>
+
+
+
+  <tr>
+   <td bgcolor="#FFFFFF"><!-- InstanceBeginEditable name="EditRegion3" -->
+     <blockquote>
+        <p class="h1">Mesurez une vitesse RPM</p>
+        <p class="h1">1. Principes &eacute;lectriques de la LDR </p>
+        <table width="300" border="0">
+          <tr>
+            <td width="152" align="right" valign="top"><p>Lumi&egrave;re  (Lux)</p></td>
+            <td width="138" align="right" valign="top"> R2  (&Omega;)</td>
+          </tr>
+          <tr>
+            <td align="right" valign="top"> 0,1	</td>
+            <td align="right" valign="top">1000 000</td>
+          </tr>
+          <tr>
+            <td align="right" valign="top">1	</td>
+            <td align="right" valign="top">90 000 </td>
+          </tr>
+          <tr>
+            <td align="right" valign="top"> 10	</td>
+            <td align="right" valign="top">10 000</td>
+          </tr>
+          <tr>
+            <td align="right" valign="top">100	</td>
+            <td align="right" valign="top">1 200</td>
+          </tr>
+          <tr>
+            <td align="right" valign="top"> 1000	</td>
+            <td align="right" valign="top">500</td>
+          </tr>
+          <tr>
+            <td align="right" valign="top"> 10 000	</td>
+            <td align="right" valign="top">100 </td>
+          </tr>
+        </table>
+        <p><img src="programmer-rpm/LDR-reponse.png" width="477" height="286">
+        </p>
+        <p class="h0">Conclusion&nbsp;: La valeur de R2 diminue lorsqu'il y a augmentation de lumi&egrave;re.  R2 sera comprise entre 1000 k&Omega; et 0,1 k&Omega; </p>
+        <p class="h0">&nbsp;</p>
+        <p class="h1">2. &Eacute;tude du Montage utilis&eacute; pour notre projet </p>
+        <p class="h0">&nbsp;</p>
+        <p class="h0">Soit le montage suivant avec un microcontr&ocirc;leur ,  une r&eacute;sistance Ra de 10k &Omega; et une photor&eacute;sistance LDR. Le sch&eacute;ma de principe correspondant au montage. </p>
+        <p class="h0"><img src="programmer-rpm/vcc-va-v2.png" width="800" height="427"></p>
+        <p class="h0">&nbsp;</p>
+        <p class="h0">&nbsp;</p>
+        <p class="h0">VP0 = Va = Vcc - V2<br>
+V2 = R2.i V2 + Va = Vcc R2.i + Ra.i = 3 i.(R2+Ra) = 3 i = 3 / (R2+Ra)<br>
+V2 = R2. 3 / (R2+Ra) <br>
+VP0 = Vcc &ndash; V2<br>
+VP0 = 3 - 3. R2 / (R2+Ra)</p>
+        <p class="h0"> - A l'aide des valeurs de R2 d&eacute;termin&eacute;es pr&eacute;c&eacute;demment, calculez la valeur de VP0 dans le noir. </p>
+        <p class="h0">Dans le noir R2 = 1000 k&Omega; <br>
+        VP0 = 3 - 3 x 1000 / 1010<br>
+VP0 = 3 - 2,97 <br>
+VP0 = 0,03</p>
+        <p class="h0"> - Calculez la valeur de VP0 en pleine lumi&egrave;re. En pleine lumi&egrave;re  </p>
+        <p class="h0">R2 = 0,1 k&Omega; <br>
+        VP0 = 3 - 3 x 0,1 / 10,1<br>
+VP0 = 3 &ndash; 0,029 <br>
+VP0 = 2,971 </p>
+        <p class="h0">&nbsp;</p>
+        <p class="h0">Conclusion&nbsp;: Ainsi notre microcontr&ocirc;leur va recevoir en entr&eacute;e sur P0 des valeurs directement proportionnelles &agrave; la lumi&egrave;re capt&eacute;e par la LDR, sur une &eacute;chelle de 0 &agrave; 3 Volts. </p>
+        <p class="h0">&nbsp;</p>
+        <p class="h1">3. Capter le signal, calibrer les niveaux </p>
+        <p class="h0">Dans ces conditions on peut tester le montage, le premier programme doit simplement permettre de voir le signal qui entre sur P0. </p>
+        <p class="h0"><img src="programmer-rpm/handspinner-ldr.png" width="400"></p>
+        <p class="h0">7-Fidget-Spinner-Light-calibration.hex </p>
+        <p class="h0">currentlightreading = 0 <br>
+        minlightvalue = 3 <br>
+        maxlightvalue = 9 <br>
+        serial.write_line(&quot;ready to start&quot;) <br>
+        while True:     <br>
+        # R&eacute;cup&eacute;rer la valeur actuelle, puis la diviser par un nombre permettant  <br>
+        # de la ramener &agrave; un chiffre (ici, une division par 100) ; cela facilite la  <br>
+        #  d&eacute;tection des valeurs de luminosit&eacute; &eacute;lev&eacute;es et faibles, car il y a moins  <br>
+        # de paliers de niveau lumineux<br>
+        currentlightreading = Math.idiv(pins.analog_read_pin(AnalogReadWritePin.P0), 100)     <br>
+        serial.write_value(&quot;Light reading&quot;, currentlightreading) <br>
+        <br>
+        </p>
+        <p class="h0"><img src="programmer-rpm/lightreading-1.png" width="800" height="487"><br>
+        <a href="https://makecode.microbit.org/S55542-11470-73345-77039">https://makecode.microbit.org/S55542-11470-73345-77039</a></p>
+        <p class="h0">&nbsp;</p>
+        <p class="h0">Ici avec la lumi&egrave;re ambiante aujourd'hui, le signal sur P0 vaut 3 dans le noir et 9 dans la lumi&egrave;re. Ainsi, pour la suite du programme on pourra d&eacute;finir les variables&nbsp;:  minlight &agrave; 3 maxlight &agrave; 9 </p>
+        <p class="h0">&nbsp;</p>
+        <p class="h1">4. D&eacute;terminer une vitesse de rotation RPM (trs/min) </p>
+        <p class="h0">Ce montage sera tout &agrave; fait adapt&eacute; &agrave; la mesure de vitesse si on consid&egrave;re la roue arri&egrave;re du v&eacute;lo avec un disque plein de couleur noire, avec 3 fentes. Lorsque la roue tourne, le disque masque la lumi&egrave;re, sauf au moment ou la fente laisse passer la lumi&egrave;re. Cela arrive 3 fois par tour. </p>
+        <p class="h0"><img src="programmer-rpm/velo-rpm.png" width="800" height="565"></p>
+        <p class="h0">On d&eacute;tecte les fronts descendants aux temps t1 puis t2 (t2 - t1) correspond &agrave; la dur&eacute;e entre deux passages d'une fente &agrave; la suivante (en ms) ainsi 3x(t2-t1) correspond &agrave; la dur&eacute;e pour faire un tour de roue (en ms) La roue fera 1 tour pour 3 x ( t2 &ndash; t1 ) millisecondes La roue fera combien de tours pour 1 minute&nbsp;? Ce nombre de tours pour 1 minute correspond &agrave; la vitesse RPM&nbsp;! <br>
+          <br>
+        1  tour    &rarr;   3 x ( t2 &ndash; t1 )  ms         <br>
+        ?  tours  &rarr;   1min = 60 000 ms   <br>
+        RPM&nbsp; =  60 000 x 1 / (3 x ( t2 &ndash; t1 ) )<br>
+        <br>
+# on d&eacute;fini une fonction pour le calcul de la vitesse de rotation <br>
+ def CalculeRPM(t1: number, t2: number):     return Math.round(60000 / ((t2 - t1) * 3)) </p>
+        <p class="h0">&nbsp;</p>
+        <p class="h1">5.  Programme complet<img src="programmer-rpm/prg-compl.png" width="800" height="441"></p>
+        <p class="h0">On met en place un ensemble de variables pour notre programme, et on les initialise&nbsp;: <br>
+          <br>
+        currenttime&nbsp;=&nbsp;0      # Variable pour stocker le temps t<br>
+currentlight&nbsp;=&nbsp;0    # Stocke la lecture du capteur au temps t<br>
+lasttriggertime&nbsp;=&nbsp;0    # M&eacute;moire du temps du dernier front descendant <br>
+lastreportime&nbsp;=&nbsp;0     # M&eacute;moire de la derni&egrave;re fois qu'on a affich&eacute; le r&eacute;sultat <br>
+triggerlight&nbsp;=&nbsp;false  # Niveau de lumi&egrave;re de d&eacute;clenchement atteint,&nbsp;oui ou non <br>
+minlight&nbsp;=&nbsp;3<br>
+maxlight&nbsp;=&nbsp;9 </p>
+        <p class="h0"> 7-Fidget-Spinner-RPM.hex </p>
+        <p class="h0"># on d&eacute;fini une fonction pour le calcul de la vitesse de rotation </p>
+        <p class="h0">def CalculeRPM(t1: number, t2: number):<br>
+return Math.round(60000 / ((t2 - t1) * 3))</p>
+        <p class="h0"> &quot;&quot;&quot;</p>
+        <p class="h0"> Fidget Spinner RPM</p>
+        <p class="h0"> &quot;&quot;&quot;</p>
+        <p class="h0"> lasttriggertime = 0 <br>
+        lastreportime = 0 <br>
+        currenttime = 0<br>
+triggerlight = False <br>
+currentlight = 0 </p>
+        <p class="h0"># on met les&nbsp;valeurs&nbsp;minlight&nbsp;et&nbsp;maxlight&nbsp;issues du calibrage pr&eacute;c&eacute;dent <br>
+        minlight = 3<br>
+maxlight = 7 </p>
+        <p class="h0"># Message pour dire que le programme commence</p>
+        <p class="h0"> serial.write_line(&quot;ready to start&quot;)</p>
+        <p class="h0"> # la boucle forever est trop lente, on va utiliser une boucle <br>
+          <br>
+        while True: </p>
+        <p class="h0"># lire&nbsp;la&nbsp;valeur&nbsp;sur&nbsp;P0&nbsp;et&nbsp;diviser&nbsp;par&nbsp;100&nbsp;,&nbsp;<br> 
+        # cela&nbsp;arrondi&nbsp;les&nbsp;valeurs&nbsp;et&nbsp;facilite&nbsp;la&nbsp;d&eacute;tection&nbsp;du&nbsp;niveau&nbsp;haut&nbsp;et&nbsp;bas     </p>
+        <p class="h0">currentlight = Math.idiv(pins.analog_read_pin(AnalogReadWritePin.P0), 100)     </p>
+        <p class="h0"># v&eacute;rifier&nbsp;si&nbsp;la&nbsp;lumi&egrave;re&nbsp;est&nbsp;descendue&nbsp;&agrave;&nbsp;une&nbsp;plus&nbsp;basse&nbsp;valeur&nbsp;<br> 
+        # apr&egrave;s&nbsp;avoir&nbsp;&eacute;t&eacute;&nbsp;&agrave; une&nbsp;plus&nbsp;haute&nbsp;valeur<br>
+# cela&nbsp;&eacute;limine&nbsp;ou&nbsp;diminue&nbsp;le&nbsp;risque&nbsp;de&nbsp;faux&nbsp;positifs     </p>
+        <p class="h0">if currentlight == minlight and triggerlight == False:         <br>
+        triggerlight = True<br>
+currenttime = input.running_time()<br>
+if currenttime - lastreportime &gt; 1000:</p>
+        <p class="h0"> # &eacute;crire&nbsp;le&nbsp;r&eacute;sultat&nbsp;une&nbsp;fois&nbsp;par&nbsp;seconde,<br>
+# pas&nbsp;plus,&nbsp;sinon&nbsp;serial.write&nbsp;ralenti&nbsp;beaucoup&nbsp;trop             </p>
+        <p class="h0">lastreportime = currenttime<br>
+serial.write_value(&quot;RPM&quot;, CalculeRPM(lasttriggertime, currenttime))         lasttriggertime = currenttime</p>
+        <p class="h0"> # v&eacute;rifier&nbsp;si&nbsp;la&nbsp;lumi&egrave;re&nbsp;atteint&nbsp;la&nbsp;plus&nbsp;haute&nbsp;valeur&nbsp;</p>
+        <p class="h0"> # et&nbsp;si&nbsp;c'est&nbsp;bien&nbsp;le&nbsp;cas,&nbsp;mettre triggerlight &agrave; FALSE.  </p>
+        <p class="h0"># Ainsi on est pr&ecirc;t &agrave; d&eacute;tecter la prochaine valeur la plus basse.     </p>
+        <p class="h0">if currentlight == maxlight:<br>
+triggerlight = False</p>
+        <p class="h0">&nbsp;</p>
+        <p class="h0"><img src="programmer-rpm/prg-compl-2.png" width="800" height="763"></p>
+        <p class="h0">&nbsp;</p>
+        <p><img src="programmer-rpm/prg-compl-3.png" width="800" height="581"></p>
+        <p><a href="https://makecode.microbit.org/S41026-06439-08106-82173">https://makecode.microbit.org/S41026-06439-08106-82173</a></p>
+        <p></p>
+        <p>Techno-Jardel 2026<br>
+        D'apr&egrave;s une id&eacute;e originale de <a href="https://www.youtube.com/watch?v=px_TGk7_XSQ" target="_blank">MicroMonsters - Episode 16 - micro:bit Fidget Spinner Speed Te</a>st</p>
+        <p>&nbsp;</p>
+      </blockquote>
+
+   <!-- InstanceEndEditable --></td>
+  </tr>
+
+
+<tr height="40px">
+   <td bgcolor="#6F8B99">
+        <p> <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="new"><img src="Templates/Creative-Commons-cc-by-nc-nd.jpg" width="200"></a></p>        
+   </td>
+  </tr><br>
+
+</table><br>
+
+</body>	
+
+<!-- InstanceEnd --></html>
